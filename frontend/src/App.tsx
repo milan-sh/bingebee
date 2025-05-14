@@ -1,9 +1,10 @@
-import { Home } from "./pages"
+import { Home, Login } from "./pages"
 
 const App = () => {
   return (
     <>
       <Home/>
+      <Login/>
     </>
   )
 }
