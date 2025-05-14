@@ -11,7 +11,8 @@ const Login = () => {
             <h1 className="inline-flex justify-between items-center md:gap-x-5 gap-x-3 md:text-4xl text-2xl font-medium text-gray-300 md:mb-8 mb-4"><Lock className="md:h-10 md:w-10 h-7 w-7"/> Login</h1>
             <Input className="text-xl" placeholder="username"/>
             <Input className="text-xl" placeholder="password"/>
-            <Button className="w-full cursor-pointer text-lg py-6 hover:bg-secondary">Log in</Button>
+            <Button className="w-full cursor-pointer text-lg py-5 bg-accent hover:bg-secondary">Demo Login</Button>
+            <Button className="w-full cursor-pointer text-lg py-5 hover:bg-secondary">Log in</Button>
         </div>
     </div>
   )
