@@ -1,11 +1,9 @@
-import { Home, Login, Signup } from "./pages"
+import { Outlet } from "react-router"
 
 const App = () => {
   return (
     <>
-      <Home/>
-      <Login/>
-      <Signup/>
+      <Outlet />
     </>
   )
 }
