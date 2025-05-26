@@ -7,28 +7,6 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { deleteFromCloudinary } from "../utils/destroyCloudinaryUrl.js";
 
-const getPublicVideos = asyncHandler(async(req, res)=>{
-  const videos = await Video.find({
-    isPublished:true
-  }).sort('-createdAt') // Newest first
-  .populate({
-    path: 'owner',
-    select: 'username avatar' // Only include necessary owner fields
-  })
-  .lean(); // Convert to plain JS objects for better performance
-
-  if(!videos.length){
-    throw new ApiError(404, "No video found")
-  }
-
-  return res 
-  .status(200)
-  .json(new ApiResponse(
-    200,
-    videos,
-    "fetched all public videos"
-  ))
-})
 
 const getAllVideos = asyncHandler(async (req, res) => {
   const {
@@ -296,4 +274,4 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
 
 })
 
-export { getAllVideos,publishAVideo, getVideoById, updateVideo, deleteVideo, togglePublishStatus, getPublicVideos };
+export { getAllVideos,publishAVideo, getVideoById, updateVideo, deleteVideo, togglePublishStatus };
