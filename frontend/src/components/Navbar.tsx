@@ -1,5 +1,6 @@
 import Logo from "./Logo"
 import { Menu, Search } from "lucide-react"
+import { Link } from "react-router"
 
 const Navbar = () => {
   return (
@@ -10,9 +11,9 @@ const Navbar = () => {
             <Menu size={30}/>
         </div>
         <div className="flex justify-between items-center gap-x-6">
-            <button className="hover:bg-secondary-foreground p-2 cursor-pointer">Log in</button>
+            <Link to="/login"><button className="hover:bg-secondary-foreground p-2 cursor-pointer">Log in</button></Link>
             <div className="relative">
-                <button className="relative font-semibold bg-primary text-black hover:text-white text-lg py-1 px-3 cursor-pointer z-30">Sign up</button>
+                <Link to="/signup"><button className="relative font-semibold bg-primary text-black hover:text-white text-lg py-1 px-3 cursor-pointer z-30">Sign up</button></Link>
                 <div className="absolute left-3 top-1 h-9 w-20 bg-white z-10"></div>
             </div>
         </div>
