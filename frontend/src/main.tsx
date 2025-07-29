@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {Home} from "./pages/index.ts"
+import {Home, Login, Signup} from "./pages/index.ts"
 
 const router = createBrowserRouter([
   {
@@ -13,6 +13,14 @@ const router = createBrowserRouter([
       {
         path:"/",
         element:<Home/>
+      },
+      {
+        path:"/login",
+        element:<Login/>
+      },
+      {
+        path:"/signup",
+        element:<Signup/>
       }
     ]
   }

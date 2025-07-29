@@ -4,7 +4,7 @@ import { Link } from "react-router"
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-between py-1 px-3 md:px-6">
+    <nav className="sticky top-0 flex items-center justify-between py-1 px-3 md:px-6 bg-black text-white border-b-[1px]">
         <Logo/>
         <div className="hidden flex items-center justify-between gap-x-6">
             <Search size={30} />
