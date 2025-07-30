@@ -26,6 +26,8 @@ import likeRouter from "./routes/like.routes.js"
 import tweetRouter from "./routes/tweet.routes.js"
 import dashboardRouter from "./routes/dashboard.routes.js"
 
+import { errorHandler } from "./middlewares/error.middleware.js";
+
 
 //handling route
 //statndard practice
@@ -39,5 +41,7 @@ app.use("/api/v1/like", likeRouter)
 app.use("/api/v1/tweet", tweetRouter)
 app.use("/api/v1/dashboard", dashboardRouter)
 
+//common error handling middleware
+app.use(errorHandler)
 
 export {app};
