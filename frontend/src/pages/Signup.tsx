@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import type { SignupFormValues } from "../interfaces/form";
 import { Input } from "../components/index";
 import { Button } from "@/components/ui/button";
+import {useAuth} from "../context/AuthCotext"
 
 const Signup = () => {
   const {
@@ -11,11 +12,14 @@ const Signup = () => {
     reset,
   } = useForm<SignupFormValues>();
 
-  const onSubmit = (data: SignupFormValues) => {
+  const {register:regsiterUser} = useAuth();
+
+  const onSubmit = async (data: SignupFormValues) => {
     const avatar = data.avatar?.[0]
     const coverImage = data.coverImage?.[0]
-
+    await regsiterUser(data)
     console.log({...data, avatar, coverImage});
+
     reset();
   };
   return (

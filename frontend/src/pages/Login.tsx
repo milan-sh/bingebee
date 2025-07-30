@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Input } from "../components/index";
 import type { LoginFormValues } from "../interfaces/form";
 import { Button } from "@/components/ui/button";
+import {useAuth} from "../context/AuthCotext"
 
 const Login = () => {
   const {
@@ -11,9 +12,10 @@ const Login = () => {
     reset,
   } = useForm<LoginFormValues>();
 
-  const onSubmit =(data:LoginFormValues)=>{
-    console.log(data)
+  const {login}  = useAuth()
 
+  const onSubmit = async (data:LoginFormValues)=>{
+    await login(data);
     reset();
   }
   return (

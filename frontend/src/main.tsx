@@ -4,11 +4,16 @@ import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import {Home, Login, Signup} from "./pages/index.ts"
+import {AuthProvider} from "./context/AuthCotext.tsx"
 
 const router = createBrowserRouter([
   {
     path:"/",
-    element: <App/>,
+    element: (
+      <AuthProvider>
+        <App/>
+      </AuthProvider>
+    ),
     children: [
       {
         path:"/",
