@@ -1,4 +1,4 @@
-import type {AxiosResponse, AxiosError} from "axios"
+import type {AxiosResponse} from "axios"
 import type {FreeAPISuccessResponseInterface} from "../interfaces/api"
 
 // A utility function for handling API requests with loading, success, and error handling

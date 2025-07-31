@@ -38,7 +38,7 @@ const AuthProvider = ({children}: {children: React.ReactNode})=>{
         await requestHandler(
             async ()=> await loginUser(data),
             setIsLoading,
-            (res)=>{
+            (res:any)=>{
                 const {data} = res;
                 setUser(data.user);
                 setToken(data.accessToken);
