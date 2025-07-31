@@ -12,7 +12,7 @@ const AuthContext = createContext<{
     user: UserInterface | null;
     token: string | null;
     login: (data: LoginFormValues)=> Promise<void>;
-    register:(data: SignupFormValues)=> Promise<void>;
+    register:(data: FormData)=> Promise<void>;
     logout: ()=> Promise<void>
 
 }>({

@@ -3,10 +3,6 @@ import { LocalStorage } from "@/utils"
 
 const apiClient = axios.create({
     baseURL: "/api/v1",
-    headers: {
-        "Content-Type": "application/json",
-        "Accept": "applicatin/json"
-    },
     timeout: 10000, // Set a timeout of 10 seconds
     withCredentials:true, // Include credentials in requests
 })

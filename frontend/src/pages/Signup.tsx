@@ -15,10 +15,26 @@ const Signup = () => {
   const {register:regsiterUser} = useAuth();
 
   const onSubmit = async (data: SignupFormValues) => {
-    const avatar = data.avatar?.[0]
-    const coverImage = data.coverImage?.[0]
-    await regsiterUser(data)
-    console.log({...data, avatar, coverImage});
+    
+    const formData = new FormData();
+
+    //Append all fields
+    formData.append("fullName", data.fullName)
+    formData.append("email", data.email)
+    formData.append("username", data.username)
+    formData.append("password", data.password)
+    formData.append("avatar", data.avatar[0])
+    if(data.coverImage && data.coverImage.length>0){
+      formData.append("coverImage", data.coverImage[0])
+    }
+
+    // Debugging: Log formData contents
+    // for (const [key, value] of formData.entries()) {
+    //   console.log(key, value);
+    // }
+
+    //registering user
+    await regsiterUser(formData)
 
     reset();
   };

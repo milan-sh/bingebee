@@ -1,4 +1,4 @@
-import type {AxiosResponse} from "axios"
+import type {AxiosResponse, AxiosError} from "axios"
 import type {FreeAPISuccessResponseInterface} from "../interfaces/api"
 
 // A utility function for handling API requests with loading, success, and error handling
@@ -20,7 +20,6 @@ export const requestHandler = async(
             onSuccess(data)
         }
     } catch (error:any) {
-        console.log(error)
         // Handle error cases, including unauthorized and forbidden cases
         if([401, 403].includes(error?.response.data?.statusCode)){
             localStorage.clear() //clear local storage on authentication issues 
