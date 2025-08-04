@@ -34,11 +34,11 @@ const Navbar = () => {
           </Link>
           <div className="relative">
             <Link to="/signup">
-              <button className="relative font-semibold bg-primary text-black hover:text-white text-lg py-1 px-3 cursor-pointer z-30">
+              <button className="relative font-semibold bg-primary text-black hover:text-white md:text-lg py-1 px-3 cursor-pointer z-30">
                 Sign up
               </button>
             </Link>
-            <div className="absolute left-3 top-1 h-9 w-20 bg-white z-10"></div>
+            <div className="absolute md:left-3 left-1 top-1 md:h-9 h-8 w-20 bg-white z-10"></div>
           </div>
         </div>
       )}
