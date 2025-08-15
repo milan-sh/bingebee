@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {Home, Login, Signup} from "./pages/index.ts"
+import {Home, Login, Signup, VideoListPage} from "./pages/index.ts"
 import {AuthProvider} from "./context/AuthCotext.tsx"
 
 const router = createBrowserRouter([
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
       {
         path:"/signup",
         element:<Signup/>
+      },
+      {
+        path:"/videos",
+        element:<VideoListPage/>  
       }
     ]
   }

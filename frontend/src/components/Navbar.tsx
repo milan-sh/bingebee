@@ -38,7 +38,7 @@ const Navbar = () => {
                 Sign up
               </button>
             </Link>
-            <div className="absolute md:left-3 left-1 top-1 md:h-9 h-8 w-20 bg-white z-10"></div>
+            <div className="absolute md:left-3 left-1 top-1 md:h-9 h-8 w-20 bg-gray-600 z-10"></div>
           </div>
         </div>
       )}
