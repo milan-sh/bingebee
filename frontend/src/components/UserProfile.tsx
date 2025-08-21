@@ -8,6 +8,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { DropdownMenu } from "./ui/dropdown-menu";
 import { useAuth } from "../context/AuthCotext";
+import { Link } from "react-router";
 
 const UserProfile = () => {
   const { user, logout } = useAuth();
@@ -22,7 +23,7 @@ const UserProfile = () => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="md:w-52 w-36 bg-accent-foreground p-2 rounded-md"
+          className="md:w-52 w-36 bg-accent-foreground p-2 border border-neutral-700"
           align="end"
         >
           <DropdownMenuLabel className="font-semibold mb-2">
@@ -30,7 +31,7 @@ const UserProfile = () => {
           </DropdownMenuLabel>
           <DropdownMenuGroup>
             <DropdownMenuItem className="cursor-pointer hover:bg-secondary-foreground py-1 px-0.5 rounded-md">
-              Dashboard
+              <Link to="/dashboard">Dashboard</Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer hover:bg-secondary-foreground py-1 px-0.5 rounded-md">
               Profile

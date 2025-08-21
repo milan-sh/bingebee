@@ -8,7 +8,7 @@ import Input from "./Input";
 const Navbar = () => {
   const { user } = useAuth();
   return (
-    <nav className="sticky top-0 flex items-center justify-between py-1 px-3 md:px-4 bg-black text-white border-b-[1px]">
+    <nav className="sticky top-0 z-50 flex items-center justify-between py-1 px-3 md:px-4 bg-black text-white border-b-[1px]">
       <Logo />
       {user && (
         <div className="hidden w-96 md:flex items-center md:gap-x-2 border px-4">

@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {Home, Login, Signup, VideoListPage} from "./pages/index.ts"
+import {Dashboard, Home, Login, Signup, VideoListPage} from "./pages/index.ts"
 import {AuthProvider} from "./context/AuthCotext.tsx"
 import MainLayout from './layout/MainLayout.tsx'
 import AuthLayout from './layout/AuthLayout.tsx'
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
       {
         index:true,
         element:<Home/>
+      },
+      {
+        path:"/dashboard",
+        element:<Dashboard/>
       },
       {
         path:"/videos",

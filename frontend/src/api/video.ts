@@ -4,4 +4,8 @@ const getPublicVideos = ()=>{
     return apiClient.get("/video/videos")
 }
 
-export {getPublicVideos}
+const uploadAVideo = (data)=>{
+    return apiClient.post("/video/", data)
+}
+
+export {getPublicVideos,uploadAVideo}

@@ -40,6 +40,7 @@ const Home = () => {
   return (
     <div className="bg-black text-white py-2 px-4">
         <p>Videos</p>
+        <button>Toast</button>
     </div>
   )
 }

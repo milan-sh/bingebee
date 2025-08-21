@@ -8,3 +8,10 @@ export interface Video {
     updatedAt: string
     owner:string
 }
+
+export interface VideoUpload {
+    title:string;
+    description:string;
+    videoFile:File | null;
+    thumbnail: FileList | null;
+}

@@ -1,3 +1,4 @@
+import type React from "react";
 import type { InputHTMLAttributes } from "react";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -21,3 +22,10 @@ export interface LoginFormValues {
     password: string;
 }
 
+export interface ButtonInterface {
+    children:React.ReactNode
+    onClick?: () => void;
+    disabled?: boolean; 
+    className?: string; 
+    type?:"submit" | "reset" | "button" | undefined;
+}
