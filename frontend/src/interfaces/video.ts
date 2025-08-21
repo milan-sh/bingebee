@@ -4,9 +4,15 @@ export interface Video {
     videoFile:string
     thumbnail:string
     description:string
-    duration:string
-    updatedAt: string
-    owner:string
+    duration:number
+    views:number,
+    updatedAt: string,
+    createdAt:string,
+    owner:{
+        _id:string,
+        fullName:string,
+        avatar:string
+    }
 }
 
 export interface VideoUpload {

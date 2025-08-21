@@ -13,7 +13,7 @@ const getPublicVideos = asyncHandler(async(req, res)=>{
   }).sort('-createdAt') // Newest first
   .populate({
     path: 'owner',
-    select: 'username avatar' // Only include necessary owner fields
+    select: 'fullName avatar' // Only include necessary owner fields
   })
   .lean(); // Convert to plain JS objects for better performance
 

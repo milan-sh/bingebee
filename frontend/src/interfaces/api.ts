@@ -1,5 +1,5 @@
 export interface FreeAPISuccessResponseInterface {
-    data:unknown;
+    data:any;
     message:string;
     statusCode:number;
     success:boolean
