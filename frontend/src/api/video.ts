@@ -8,4 +8,8 @@ const uploadAVideo = (data)=>{
     return apiClient.post("/video/", data)
 }
 
-export {getPublicVideos,uploadAVideo}
+const getVideoById = (id:string)=>{
+    return apiClient.get(`/video/${id}`)
+}
+
+export {getPublicVideos,uploadAVideo,getVideoById}

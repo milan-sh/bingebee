@@ -1,7 +1,7 @@
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
-import VideoListPage from './VideoListPage';
+import VideoDetail from './VideoDetail';
 import Dashboard from './Dashboard';
 
-export { Home, Login, Signup, VideoListPage, Dashboard };
+export { Home, Login, Signup, VideoDetail, Dashboard };

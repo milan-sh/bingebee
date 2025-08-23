@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {Dashboard, Home, Login, Signup, VideoListPage} from "./pages/index.ts"
+import {Dashboard, Home, Login, Signup, VideoDetail} from "./pages/index.ts"
 import {AuthProvider} from "./context/AuthCotext.tsx"
 import MainLayout from './layout/MainLayout.tsx'
 import AuthLayout from './layout/AuthLayout.tsx'
@@ -25,10 +25,9 @@ const router = createBrowserRouter([
         element:<Dashboard/>
       },
       {
-        path:"/videos",
-        element:<VideoListPage/>  
-      },
-      //other app routes
+        path:"/video/:videoId",
+        element:<VideoDetail/>
+      }
     ]
   },
   {
