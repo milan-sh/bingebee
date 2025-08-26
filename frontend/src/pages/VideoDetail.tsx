@@ -36,11 +36,13 @@ const VideoDetail = () => {
     if (open) {
       toggleSidebar();
     }
-    if (videoId) {
-      // TODO: fix this item's creating problem being called twice because of sidebar
-      fetchVideo(videoId);
-    }
-  }, [videoId]);
+  }, []);
+
+  useEffect(() => {
+  if (videoId) {
+    fetchVideo(videoId);
+  }
+}, [videoId]);
 
   if(loading) return <Loader />;
   if(!video) return <div className="min-h-screen w-full flex flex-col justify-center items-center text-white">
@@ -86,7 +88,7 @@ const VideoDetail = () => {
             </div>
             {/* like, dislike, save to playlist buttons */}
             <div className="flex items-center justify-between gap-4">
-              <LikeDislike />
+              <LikeDislike videoId={videoId} />
               <SaveToPlaylistButton />
             </div>
           </div>
