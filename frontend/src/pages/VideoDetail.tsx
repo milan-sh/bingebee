@@ -101,7 +101,7 @@ const VideoDetail = () => {
                 <p className="text-sm text-gray-400">757K Subscribers</p>
               </div>
             </div>
-            <SubscribeButton />
+            <SubscribeButton channelId={video?.owner._id} />
           </div>
         </div>
       </div>
