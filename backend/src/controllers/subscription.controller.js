@@ -99,4 +99,36 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
     );
 });
 
-export { toggleSubscription, getUserChannelSubscribers, getSubscribedChannels };
+const isSubscribed = asyncHandler(async(req, res)=>{
+  const {channelId} = req.params;
+  const userId = req?.user?._id;
+
+  if (channelId.toString() === userId.toString()) {
+    throw new ApiError(400, "you can't subscribe to your own channel");
+  }
+
+  const isSubscriber = await Subscription.findOne({
+    subscriber: userId,
+    channel: channelId,
+  });
+
+  if(isSubscriber){
+    return res
+    .status(200)
+    .json(new ApiResponse(
+      200,
+      {status:true},
+      "Subscribed status fetched successfully"
+    ))
+  }
+
+  return res
+  .status(200)
+  .json(new ApiResponse(
+    200,
+    {status:false}
+  ))
+
+})
+
+export { toggleSubscription, getUserChannelSubscribers, getSubscribedChannels, isSubscribed };

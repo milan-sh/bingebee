@@ -4,6 +4,7 @@ import {
   toggleSubscription,
   getUserChannelSubscribers,
   getSubscribedChannels,
+  isSubscribed
 } from "../controllers/subscription.controller.js";
 
 const router = Router();
@@ -14,5 +15,6 @@ router
   .get(getUserChannelSubscribers)
   .post(toggleSubscription);
 router.route("/u/:subscriberId").get(getSubscribedChannels);
+router.route("/status/c/:channelId").get(isSubscribed)
 
 export default router;
