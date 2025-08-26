@@ -1,7 +1,7 @@
 import { apiClient } from "./axios"
 
 const channelSubscribers = (channelId:string)=>{
-    return apiClient.get(`/subscription/c/${channelId}`)
+    return apiClient.get(`/subscriptions/c/${channelId}`)
 }
 
 const toggleSubscription = (channelId:string)=>{

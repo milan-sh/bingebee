@@ -3,20 +3,28 @@ import { useEffect, useState } from "react";
 import { requestHandler } from "@/utils/index";
 import { useParams } from "react-router";
 import { getVideoById } from "@/api/video";
+import { channelSubscribers } from "@/api/subscription";
 import type { FreeAPISuccessResponseInterface } from "@/interfaces/api";
 import type { Video } from "@/interfaces/video";
 import { toast } from "sonner";
 import ReactPlayer from "react-player";
 import { dateFormatter } from "@/utils/dateFormate";
 import { Frown } from "lucide-react";
-import { LikeDislike, Loader, SaveToPlaylistButton, SubscribeButton, VideosListView } from "@/components/index";
+import {
+  LikeDislike,
+  Loader,
+  SaveToPlaylistButton,
+  SubscribeButton,
+  VideosListView,
+} from "@/components/index";
+import { formatSubscribersCount } from "@/utils/subscriberFromat";
 
 const VideoDetail = () => {
   const { open, toggleSidebar } = useSidebar();
   const [video, setVideo] = useState<Video | null>(null);
+  const [subscribers, setSubscribers] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const { videoId } = useParams();
-
 
   // fetch video by id
   async function fetchVideo(id: string) {
@@ -25,6 +33,23 @@ const VideoDetail = () => {
       setLoading,
       (res: FreeAPISuccessResponseInterface) => {
         setVideo(res.data);
+        if (res.data.owner._id) {
+          fetchChannelSubscribers(res.data.owner._id);
+        }
+      },
+      (errMssg) => {
+        toast.error(errMssg || "Something went wrong");
+      }
+    );
+  }
+
+  //fetch channel subscribers
+  async function fetchChannelSubscribers(channelId: string) {
+    await requestHandler(
+      async () => await channelSubscribers(channelId),
+      setLoading,
+      (res: FreeAPISuccessResponseInterface) => {
+        setSubscribers(res.data.length);
       },
       (errMssg) => {
         toast.error(errMssg || "Something went wrong");
@@ -33,21 +58,25 @@ const VideoDetail = () => {
   }
 
   useEffect(() => {
+    if (videoId) {
+      fetchVideo(videoId);
+    }
+  }, [videoId]);
+
+  useEffect(() => {
     if (open) {
       toggleSidebar();
     }
   }, []);
 
-  useEffect(() => {
-  if (videoId) {
-    fetchVideo(videoId);
-  }
-}, [videoId]);
-
-  if(loading) return <Loader />;
-  if(!video) return <div className="min-h-screen w-full flex flex-col justify-center items-center text-white">
-    <Frown size={36} className="text-primary"/>
-    <span className="text-lg font-semibold">Video not found</span></div>;
+  if (loading) return <Loader />;
+  if (!video)
+    return (
+      <div className="min-h-screen w-full flex flex-col justify-center items-center text-white">
+        <Frown size={36} className="text-primary" />
+        <span className="text-lg font-semibold">Video not found</span>
+      </div>
+    );
 
   return (
     <div className="min-h-screen w-full py-8 px-4 text-white grid md:grid-cols-6 gap-2">
@@ -95,10 +124,16 @@ const VideoDetail = () => {
           {/* avatar and subscribe button */}
           <div className="mt-6 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img src={video?.owner.avatar} alt={video?.owner.fullName} className="w-10 h-10 rounded-full" />
+              <img
+                src={video?.owner.avatar}
+                alt={video?.owner.fullName}
+                className="w-10 h-10 rounded-full"
+              />
               <div>
-                <h3 className="text-lg font-semibold">{video?.owner.fullName}</h3>
-                <p className="text-sm text-gray-400">757K Subscribers</p>
+                <h3 className="text-lg font-semibold">
+                  {video?.owner.fullName}
+                </h3>
+                <p className="text-sm text-gray-400">{formatSubscribersCount(subscribers)}</p>
               </div>
             </div>
             <SubscribeButton channelId={video?.owner._id} />
