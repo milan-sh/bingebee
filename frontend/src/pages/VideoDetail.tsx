@@ -118,7 +118,7 @@ const VideoDetail = () => {
             {/* like, dislike, save to playlist buttons */}
             <div className="flex items-center justify-between gap-4">
               <LikeDislike videoId={videoId} />
-              <SaveToPlaylistButton />
+              <SaveToPlaylistButton videoId={videoId} />
             </div>
           </div>
           {/* avatar and subscribe button */}
