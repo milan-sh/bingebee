@@ -16,6 +16,7 @@ import {
   SaveToPlaylistButton,
   SubscribeButton,
   VideosListView,
+  CommentSection
 } from "@/components/index";
 import { formatSubscribersCount } from "@/utils/subscriberFromat";
 
@@ -138,6 +139,10 @@ const VideoDetail = () => {
             </div>
             <SubscribeButton channelId={video?.owner._id} />
           </div>
+        </div>
+        {/* comments */}
+        <div className="mt-3 border rounded-lg p-4">
+          <CommentSection videoId={videoId}/>
         </div>
       </div>
       {/* SidebarFeed */}
