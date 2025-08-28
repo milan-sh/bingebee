@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { requestHandler } from "@/utils";
 import { getChannelVideos } from "@/api/dashboard";
 import type { Video } from "@/interfaces/video";
+import {toggleVideoPublish} from "@/api/video"
 import { toast } from "sonner";
 import LoadingSvg from "../LoadingSvg";
 
@@ -22,15 +23,9 @@ const VideosTable = () => {
 
     const [loading, setLoading] = useState(false);
     const [videos, setVideos] = useState<Video[] | null>(null);
+    const [toggling, setToggling] = useState(false);
 
-    useEffect(()=>{
-        if(open){
-            toggleSidebar();
-        }
-    }, [])
-
-    useEffect(()=>{
-        async function fetchVideos() {
+    async function fetchVideos() {
             await requestHandler(
                 async ()=> await getChannelVideos(),
                 setLoading,
@@ -43,8 +38,29 @@ const VideosTable = () => {
             )
         }
 
+    useEffect(()=>{
+        if(open){
+            toggleSidebar();
+        }
+    }, [])
+
+    useEffect(()=>{
         fetchVideos();
     }, [])
+
+    const handlePublishToggle = async(videoId:string)=>{
+        await requestHandler(
+            async ()=> await toggleVideoPublish(videoId),
+            setToggling,
+            ()=>{
+                toast.success("Video publish status toggled.");
+                fetchVideos();
+            },
+            (error)=>{
+                toast.error(error || "Something went wrong.")
+            }
+        )
+    }
 
     if(loading){
         return <div><LoadingSvg/></div>
@@ -63,7 +79,7 @@ const VideosTable = () => {
           <TableBody>
             {/* Table rows will go here */}
             {videos && videos.map((video) => (
-              <VideoTableRow key={video._id} video={video} />
+              <VideoTableRow key={video._id} video={video} handlePublishToggle={handlePublishToggle} fetchVideos={fetchVideos}/>
             ))}
           </TableBody>
         </Table>
