@@ -12,5 +12,6 @@ import SaveToPlaylistButton from "./SaveToPlaylistButton";
 import SubscribeButton from "./SubscribeButton";
 import VideosListView from "./VideosListView";
 import CommentSection from "./CommentSection";
+import VideosTable from "./dashbaord/VideosTable";
 
-export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, LikeDislike, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection };
+export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, LikeDislike, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable };

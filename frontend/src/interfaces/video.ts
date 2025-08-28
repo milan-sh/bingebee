@@ -6,6 +6,7 @@ export interface Video {
     description:string
     duration:number
     views:number,
+    isPublished:boolean,
     updatedAt: string,
     createdAt:string,
     owner:{
