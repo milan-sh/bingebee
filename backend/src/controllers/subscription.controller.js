@@ -103,10 +103,6 @@ const isSubscribed = asyncHandler(async(req, res)=>{
   const {channelId} = req.params;
   const userId = req?.user?._id;
 
-  if (channelId.toString() === userId.toString()) {
-    throw new ApiError(400, "you can't subscribe to your own channel");
-  }
-
   const isSubscriber = await Subscription.findOne({
     subscriber: userId,
     channel: channelId,
