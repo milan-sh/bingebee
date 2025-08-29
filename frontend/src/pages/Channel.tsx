@@ -7,7 +7,7 @@ import type {UserInterface} from "@/interfaces/user"
 import { formatSubscribersCount, formatSubscribedChannelsCount } from "@/utils/subscriberFromat";
 import { toast } from "sonner";
 import { useParams } from "react-router";
-import { Button, Loader, SubscribeButton } from "@/components";
+import { Button, Loader, SubscribeButton, TabSection } from "@/components";
 import { UserRoundPlus } from "lucide-react";
 
 const Channel = () => {
@@ -56,14 +56,14 @@ const Channel = () => {
   if(loading) return <div className="min-h-screen w-full flex items-center justify-center"><Loader/></div>
 
   return (
-    <div className="min-h-screen w-full text-white">
+    <div className="min-h-screen w-full text-white mt-10 md:mt-0">
         {/* profile section */}
       <div className="min-h-50 w-full border">
         {user?.coverImage && (
           <img src={user.coverImage} className="w-full h-50 object-cover" />
         )}
       </div>
-      <div className="flex justify-between items-center px-4">
+      <div className="flex flex-col md:flex-row justify-between md:items-center px-4 mb-4">
         <div className="flex gap-4 items-center">
           <img
             src={user?.avatar}
@@ -80,6 +80,8 @@ const Channel = () => {
         </div>
         <SubscribeButton channelId={channelId}/>
       </div>
+      {/* Tabs */}
+      <TabSection channelId={channelId}/>
     </div>
   );
 };
