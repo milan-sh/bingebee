@@ -34,7 +34,7 @@ const UserProfile = () => {
               <Link to="/dashboard">Dashboard</Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer hover:bg-secondary-foreground py-1 px-0.5 rounded-md">
-              Profile
+              <Link to={`/channel/${user?._id}`}>Channel</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator className="my-1" />

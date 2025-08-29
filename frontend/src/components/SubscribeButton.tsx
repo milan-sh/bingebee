@@ -1,4 +1,4 @@
-import {UserRoundCheck, UserRoundMinus} from "lucide-react"
+import {UserRoundPlus, UserRoundMinus} from "lucide-react"
 import Button from "./Button"
 import {toggleSubscription, isSubscribed} from "@/api/subscription.ts"
 import {requestHandler} from "@/utils/index.ts"
@@ -15,7 +15,7 @@ const SubscribeButton = ({channelId}: {channelId: string}) => {
       async()=> toggleSubscription(channelId),
       setLoading,
       ()=> setSubscribed(prev => !prev),
-      (errMssg)=> console.log(errMssg || "Something went wrong")
+      (errMssg)=> toast.error(errMssg || "Something went wrong")
     )
   }
 
@@ -33,8 +33,9 @@ const SubscribeButton = ({channelId}: {channelId: string}) => {
 
   return (
     <Button className="flex items-center gap-2"
+    disabled={loading}
     onClick={handleSubscribeToggle}
-    >{subscribed ? <UserRoundMinus /> : <UserRoundCheck />} {subscribed ? "Unsubscribe" : "Subscribe"}</Button>
+    >{subscribed ? <UserRoundMinus /> : <UserRoundPlus />} {subscribed ? "Unsubscribe" : "Subscribe"}</Button>
   )
 }
 
