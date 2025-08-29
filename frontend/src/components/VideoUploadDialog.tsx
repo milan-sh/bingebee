@@ -169,7 +169,7 @@ const VideoUploadDialog = () => {
             type="file"
             label="Thumbnail*"
             accept="image/*"
-            {...register("thumbnail", {required: "Thumbnail is required.", validate: files=>files && files?.length===1 || "Please uplaod 1 image"})}
+            {...register("thumbnail", {required: "Thumbnail is required.", validate: files=>files && files?.length===1 || "Please upload 1 image"})}
             className="file:bg-primary file:px-4 file:py-1"
             />
             {errors.thumbnail && <p className="text-red-600 my-0.5">{errors.thumbnail.message as string}.</p>}

@@ -1,3 +1,4 @@
+import type { UpdateVideoFormValues } from "@/interfaces/form";
 import { apiClient } from "./axios";
 
 const getPublicVideos = ()=>{
@@ -20,4 +21,8 @@ const deleteVideo = (videoId:string)=>{
     return apiClient.delete(`/video/${videoId}`)
 }
 
-export {getPublicVideos,uploadAVideo,getVideoById,toggleVideoPublish,deleteVideo}
+const updateVideoDetails = (videoId:string, data:FormData)=>{
+    return apiClient.patch(`/video/${videoId}`, data)
+}
+
+export {getPublicVideos,uploadAVideo,getVideoById,toggleVideoPublish,deleteVideo,updateVideoDetails}

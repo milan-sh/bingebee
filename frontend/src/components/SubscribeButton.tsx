@@ -3,6 +3,7 @@ import Button from "./Button"
 import {toggleSubscription, isSubscribed} from "@/api/subscription.ts"
 import {requestHandler} from "@/utils/index.ts"
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 const SubscribeButton = ({channelId}: {channelId: string}) => {
 
@@ -24,11 +25,11 @@ const SubscribeButton = ({channelId}: {channelId: string}) => {
         async()=> isSubscribed(channelId),
         setLoading,
         (res)=> setSubscribed(res.data.status),
-        (errMssg)=> console.log(errMssg || "Something went wrong")
+        (errMssg)=> toast.error(errMssg || "Something went wrong")
       )
     }
     fetchSubscriptionStatus()
-  } ,[])
+  }, [channelId])
 
   return (
     <Button className="flex items-center gap-2"

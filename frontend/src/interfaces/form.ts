@@ -29,3 +29,9 @@ export interface ButtonInterface {
     className?: string; 
     type?:"submit" | "reset" | "button" | undefined;
 }
+
+export interface UpdateVideoFormValues {
+    title: string;
+    description: string;
+    thumbnail:  FileList | string;
+}
