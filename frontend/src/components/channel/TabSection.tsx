@@ -1,5 +1,6 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import VideoTab from "./VideoTab"
+import PlaylistTab from "./PlaylistTab"
 
 const TabSection = ({channelId}: {channelId:string}) => {
   return (
@@ -13,7 +14,7 @@ const TabSection = ({channelId}: {channelId:string}) => {
         </TabsList>
         {/* Tab Contents */}
         <VideoTab />
-        <TabsContent value="playlists">Playlists</TabsContent>
+        <PlaylistTab channelId={channelId}/>
       </Tabs>
     </div>
   )

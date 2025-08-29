@@ -5,7 +5,11 @@ export interface Playlist {
     name:string;
     description:string;
     owner:UserInterface;
-    videos:string[];
+    videos: {
+        _id:string;
+        thumbnail:string;
+    }[];
+    createdAt:string;
 }
 
 export interface CreatePlaylistRequest {
