@@ -114,6 +114,8 @@ const getUserTweets = asyncHandler(async (req, res) => {
           username: "$TweetOwner.username",
           avatar: "$TweetOwner.avatar"
         },
+        createdAt:1,
+        updatedAt:1
       },
     },
   ]);
