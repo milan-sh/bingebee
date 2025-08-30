@@ -7,6 +7,7 @@ import { requestHandler } from "@/utils";
 import { getAllPlaylist } from "@/api/playlist";
 import { toast } from "sonner";
 import { dateFormatter } from "@/utils/dateFormate";
+import noVideo from "@/assets/noVideo.jpg"
 
 const PlaylistTab = ({channelId}:{channelId:string}) => {
     const [playLists, setPlaylists] = useState<Playlist[] | null>(null)
@@ -51,13 +52,13 @@ const PlaylistTab = ({channelId}:{channelId:string}) => {
         {playLists.map((playlist)=>(
             <div key={playlist._id} className="flex flex-col">
                 <div className="relative mb-2">
-                    <img src={playlist.videos[playlist.videos.length - 1].thumbnail} alt="" className="h-64 w-full object-cover"/>
-                    <div className="absolute bottom-0 inset-x-0 flex justify-between bg-white/30 backdrop-blur-xs p-4">
+                    <img src={playlist.videos[playlist.videos.length - 1]?.thumbnail ?? noVideo} alt="" className="h-64 w-full object-cover"/>
+                    <div className="absolute bottom-0 inset-x-0 flex justify-between bg-black/30 backdrop-blur-xs p-4">
                         <div>
                             <p>Playlist</p>
                             <p>{dateFormatter(playlist.createdAt)}</p>
                         </div>
-                        <p>{playlist.videos.length} videos</p>
+                        <p>{playlist.videos.length || 0} videos</p>
                     </div>
                 </div>
                 <h3 className="font-semibold text-gray-200">{playlist.name}</h3>
