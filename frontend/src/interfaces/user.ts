@@ -9,3 +9,15 @@ export interface UserInterface {
     createdAt:string;
     updatedAt:string;
 }
+
+export interface subscribedChannel{
+    _id:string;
+    subscriber:string;
+    channel:{
+        _id:string;
+        email:string;
+        username:string;
+        fullName:string;
+        avatar:string;
+    }
+}

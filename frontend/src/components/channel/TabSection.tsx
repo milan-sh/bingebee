@@ -2,6 +2,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import VideoTab from "./VideoTab"
 import PlaylistTab from "./PlaylistTab"
 import TweetTab from "./TweetTab"
+import SubscribedTab from "./SubscribedTab"
 
 const TabSection = ({channelId}: {channelId:string}) => {
   return (
@@ -17,6 +18,7 @@ const TabSection = ({channelId}: {channelId:string}) => {
         <VideoTab />
         <PlaylistTab channelId={channelId}/>
         <TweetTab channelId={channelId}/>
+        <SubscribedTab channelId={channelId}/>
       </Tabs>
     </div>
   )

@@ -11,7 +11,7 @@ const Button = ({
   return (
     <div className="relative">
       <button
-        className={`relative font-semibold bg-primary text-black hover:bg-accent hover:text-black  md:text-lg py-1 px-3 cursor-pointer z-30 ${className} text-shadow-lg`}
+        className={`relative font-semibold bg-primary text-black hover:bg-accent hover:text-black  md:text-lg py-1 px-3 cursor-pointer z-30 text-shadow-lg ${className}`}
         onClick={onClick}
         disabled={disabled}
         type={type}
