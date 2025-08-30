@@ -15,7 +15,7 @@ const TabSection = ({channelId}: {channelId:string}) => {
             <TabsTrigger value="subscribed">Subscribed</TabsTrigger>
         </TabsList>
         {/* Tab Contents */}
-        <VideoTab />
+        <VideoTab channelId={channelId}/>
         <PlaylistTab channelId={channelId}/>
         <TweetTab channelId={channelId}/>
         <SubscribedTab channelId={channelId}/>

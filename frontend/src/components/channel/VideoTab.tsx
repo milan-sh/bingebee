@@ -5,12 +5,19 @@ import { TabsContent } from "@radix-ui/react-tabs"
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 import LoadingSvg from "../LoadingSvg";
-import { Play } from "lucide-react";
+import { Play, Plus } from "lucide-react";
 import { formatDuration } from "@/utils/durationFormat";
 import { Link } from "react-router";
 import { dateFormatter } from "@/utils/dateFormate";
+import Button from "../Button";
+import { useAuth } from "@/context/AuthCotext";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
+import VideoUploadDialog from "../VideoUploadDialog";
 
-const VideoTab = () => {
+const VideoTab = ({channelId}:{channelId:string}) => {
+
+    const {user} = useAuth();
+
     const [videos, setVideos] = useState<Video[] | null>(null);
     const [loading, setLoading] = useState(false)
 
@@ -44,6 +51,13 @@ const VideoTab = () => {
                 </div>
                 <h2 className="font-semibold text-gray-200">No videos Uploaded</h2>
                 <p className="text-gray-200 max-w-96 text-center">This page has yet to upload a video. Search another page in order to find more videos.</p>
+                {channelId===user?._id && (
+                    <Dialog>
+                        <DialogTrigger><div className="bg-primary px-4 py-2 text-black font-semibold flex items-center gap-2 mt-2"><Plus/> New Video </div></DialogTrigger>
+                        <VideoUploadDialog/>
+                    </Dialog>
+                    
+                )}
             </TabsContent>
         )
     }
