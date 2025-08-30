@@ -23,7 +23,6 @@ const toggleSubscription = asyncHandler(async (req, res) => {
     channel: channelId,
   });
 
-  console.log(isSubscriber);
   if (isSubscriber) {
     await Subscription.findByIdAndDelete(isSubscriber._id);
     return res
@@ -80,14 +79,14 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
 
   const channels = await Subscription.find({
     subscriber: subscriberId,
-  }).populate("channel", "_id fullName email");
+  }).populate("channel", "_id username fullName avatar email");
 
   if (channels.length === 0) {
     return res
       .status(200)
       .json(new ApiResponse(200, {}, "no subscribed channel"));
   }
-
+  
   return res
     .status(200)
     .json(
