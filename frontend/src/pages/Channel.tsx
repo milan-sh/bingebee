@@ -9,7 +9,7 @@ import {
   formatSubscribedChannelsCount,
 } from "@/utils/subscriberFromat";
 import { toast } from "sonner";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { Button, Loader, SubscribeButton, TabSection } from "@/components";
 import { Pencil, UserRoundPlus } from "lucide-react";
 
@@ -90,9 +90,11 @@ const Channel = () => {
           </div>
         </div>
         {channelId === user?._id ? (
-          <Button className="flex gap-2 items-center text-lg">
-            <Pencil /> Edit
-          </Button>
+          <Link to={`/profile/${user?._id}`}>
+            <Button className="flex gap-2 items-center text-lg">
+              <Pencil /> Edit
+            </Button>
+          </Link>
         ) : (
           <SubscribeButton channelId={channelId} />
         )}

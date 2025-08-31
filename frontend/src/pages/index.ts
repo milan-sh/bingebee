@@ -4,5 +4,6 @@ import Signup from './Signup';
 import VideoDetail from './VideoDetail';
 import Dashboard from './Dashboard';
 import Channel from "./Channel"
+import EditProfile from './EditProfile';
 
-export { Home, Login, Signup, VideoDetail, Dashboard, Channel };
+export { Home, Login, Signup, VideoDetail, Dashboard, Channel, EditProfile };

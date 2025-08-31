@@ -35,3 +35,7 @@ export interface UpdateVideoFormValues {
     description: string;
     thumbnail:  FileList | string;
 }
+
+export interface UpdateCoverImage {
+    coverImage:FileList | string;
+}
