@@ -2,36 +2,41 @@ import { Eye, Heart, Plus, User, X } from "lucide-react";
 import { Loader, VideoUploadDialog, VideosTable } from "../components/index.ts";
 import { useEffect, useState } from "react";
 import { requestHandler } from "@/utils/index.ts";
-import {getDashboardStats} from "@/api/dashboard.ts"
+import { getDashboardStats } from "@/api/dashboard.ts";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog.tsx";
 import { toast } from "sonner";
 
 const Dashboard = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [stats, setStats] = useState({ views: 0, subscribers: 0, likes: 0 });
   const [statsLoading, setStatsLoading] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     async function fetchStats() {
       await requestHandler(
-        async()=> await getDashboardStats(),
+        async () => await getDashboardStats(),
         setStatsLoading,
-        (res)=>{
+        (res) => {
           setStats({
             views: res.data.toatalViews | 0,
             subscribers: res.data.totalSubscribers | 0,
             likes: res.data.totalVideoLikes | 0,
           });
         },
-        (error)=>{
-          toast.error(error || "something went wrong")
+        (error) => {
+          toast.error(error || "something went wrong");
         }
-      )
+      );
     }
 
     fetchStats();
-  }, [])
+  }, []);
 
-  if(statsLoading) return <div><Loader /></div>;
+  if (statsLoading)
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   return (
     <div className="relative text-white w-full h-screen my-10 md:my-4 px-4">
       <div className="flex items-center justify-between md:mb-4 mb-8 gap-4 flex-wrap">
@@ -42,20 +47,15 @@ const Dashboard = () => {
           </p>
         </div>
         {/* video upload modal */}
-        <button
-          className="flex items-center gap-x-1 bg-primary text-black hover:bg-accent py-2 px-4 cursor-pointer font-semibold text-shadow-lg"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? (
-            <X />
-          ) : (
-            <>
+        <Dialog>
+          <DialogTrigger>
+            <div className="flex items-center gap-x-1 bg-primary text-black hover:bg-accent py-2 px-4 cursor-pointer font-semibold text-shadow-lg">
               <Plus />
               <span>Upload video</span>
-            </>
-          )}
-        </button>
-        {isOpen && <VideoUploadDialog />}
+            </div>
+          </DialogTrigger>
+          <VideoUploadDialog />
+        </Dialog>
       </div>
       {/* channel stats */}
       <div className="grid md:grid-cols-3 gap-3 mb-4">
@@ -65,7 +65,9 @@ const Dashboard = () => {
           </div>
           <div>
             <p>Total Views</p>
-            <h2 className="text-3xl md:text-4xl font-semibold">{stats.views}</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold">
+              {stats.views}
+            </h2>
           </div>
         </div>
         <div className="border p-3 flex flex-col justify-between">
@@ -74,7 +76,9 @@ const Dashboard = () => {
           </div>
           <div>
             <p>Total Subscribers</p>
-            <h2 className="text-3xl md:text-4xl font-semibold">{stats.subscribers}</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold">
+              {stats.subscribers}
+            </h2>
           </div>
         </div>
         <div className="border p-3 flex flex-col justify-between">
@@ -83,12 +87,14 @@ const Dashboard = () => {
           </div>
           <div>
             <p>Total Video Likes</p>
-            <h2 className="text-3xl md:text-4xl font-semibold">{stats.likes}</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold">
+              {stats.likes}
+            </h2>
           </div>
         </div>
       </div>
       {/* videos table */}
-      <VideosTable/>
+      <VideosTable />
     </div>
   );
 };
