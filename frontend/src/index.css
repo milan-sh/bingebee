@@ -117,7 +117,4 @@
   body {
     @apply bg-background text-foreground;
   }
-  img{
-    display: inline;
-  }
 }

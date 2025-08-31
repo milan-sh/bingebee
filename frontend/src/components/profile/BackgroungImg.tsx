@@ -53,7 +53,7 @@ const BackgroungImg = ({user}:{user:UserInterface}) => {
         setLoading,
         (res)=>{
             toast.success("Background Image updated successfully`")
-            user.avatar = res.data.avatar 
+            user.avatar = res.data.coverImage 
 
         },
         (err)=> toast.error(err || "something went wrong.")
@@ -61,7 +61,7 @@ const BackgroungImg = ({user}:{user:UserInterface}) => {
   };
 
   return (
-    <div className="relative min-h-52 w-full border">
+    <div className="relative min-h-52 w-full" style={!user?.coverImage ? { border: "1px solid white" } : {}}>
       {user?.coverImage && (
         <img src={user.coverImage} className="w-full h-52 object-cover" />
       )}

@@ -38,7 +38,7 @@ const EditProfile = () => {
       <div className="flex flex-col md:flex-row justify-between md:items-center px-4 mb-4">
         <div className="flex gap-4 items-center">
           {/* avatarImg */}
-          <Avatar/>
+          <Avatar user={user}/>
           <div>
             <h1 className="text-lg md:text-2xl">{user?.fullName}</h1>
             <p className="text-sm text-gray-400">@{user?.username}</p>

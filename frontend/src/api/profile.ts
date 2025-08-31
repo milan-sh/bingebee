@@ -8,4 +8,8 @@ const updateCoverImage = (data:FormData)=>{
     return apiClient.patch(`/users/cover-image`, data)
 }
 
-export {updateCoverImage, getCurrentUserProfile}
+const updateAvatar = (data:FormData)=>{
+    return apiClient.patch(`users/avatar`, data)
+}
+
+export {updateCoverImage, getCurrentUserProfile, updateAvatar}

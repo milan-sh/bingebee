@@ -39,3 +39,7 @@ export interface UpdateVideoFormValues {
 export interface UpdateCoverImage {
     coverImage:FileList | string;
 }
+
+export interface UpdateAvatarImage {
+    avatar:FileList | string;
+}
