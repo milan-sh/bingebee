@@ -28,4 +28,8 @@ const updateVideoDetails = (videoId:string, data:FormData)=>{
     return apiClient.patch(`/video/${videoId}`, data)
 }
 
-export {getPublicVideos, getChannelvideos,uploadAVideo,getVideoById,toggleVideoPublish,deleteVideo,updateVideoDetails}
+const addVideoView = (videoId:string)=>{
+    return apiClient.patch(`/video/addView/${videoId}`)
+}
+
+export {getPublicVideos, getChannelvideos,uploadAVideo,getVideoById,toggleVideoPublish,deleteVideo,updateVideoDetails, addVideoView}

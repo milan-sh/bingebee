@@ -2,7 +2,7 @@ import { useSidebar } from "@/components/ui/sidebar";
 import { useEffect, useState } from "react";
 import { requestHandler } from "@/utils/index";
 import { useParams } from "react-router";
-import { getVideoById } from "@/api/video";
+import { addVideoView, getVideoById } from "@/api/video";
 import { channelSubscribers } from "@/api/subscription";
 import type { FreeAPISuccessResponseInterface } from "@/interfaces/api";
 import type { Video } from "@/interfaces/video";
@@ -58,9 +58,19 @@ const VideoDetail = () => {
     );
   }
 
+  async function updateVideoViews() {
+    await requestHandler(
+      async()=> await addVideoView(videoId),
+      setLoading,
+      ()=>{},
+      (err)=>toast.error(err || "something went wrong")
+    )
+  }
+
   useEffect(() => {
     if (videoId) {
       fetchVideo(videoId);
+      updateVideoViews();
     }
   }, [videoId]);
 
@@ -68,7 +78,7 @@ const VideoDetail = () => {
     if (open) {
       toggleSidebar();
     }
-  }, []);
+  }, [open, toggleSidebar]);
 
   if (loading) return <Loader />;
   if (!video)
