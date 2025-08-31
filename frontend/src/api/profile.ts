@@ -1,3 +1,4 @@
+import type { UpdatePassword, UpdatePersonalInfo } from "@/interfaces/profile"
 import { apiClient } from "./axios"
 
 const getCurrentUserProfile =()=>{
@@ -12,4 +13,12 @@ const updateAvatar = (data:FormData)=>{
     return apiClient.patch(`users/avatar`, data)
 }
 
-export {updateCoverImage, getCurrentUserProfile, updateAvatar}
+const UpdatePersonalInfoData = (data:UpdatePersonalInfo)=>{
+    return apiClient.patch(`/users/update-account`, data)
+}
+
+const UpdatePasswordData = (data:UpdatePassword)=>{
+    return apiClient.post(`/users/change-password`, data)
+}
+
+export {updateCoverImage, getCurrentUserProfile, updateAvatar, UpdatePersonalInfoData, UpdatePasswordData}

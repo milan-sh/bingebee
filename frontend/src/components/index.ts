@@ -16,5 +16,6 @@ import VideosTable from "./dashbaord/VideosTable";
 import TabSection from "./channel/TabSection";
 import BackgroungImg from "./profile/BackgroungImg";
 import { EditProfile } from "@/pages";
+import ProfileTabSection from "./profile/ProfileTabSection";
 
-export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, LikeDislike, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable, TabSection, BackgroungImg, EditProfile };
+export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, LikeDislike, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable, TabSection, BackgroungImg, EditProfile, ProfileTabSection };

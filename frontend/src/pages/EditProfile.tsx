@@ -1,6 +1,5 @@
-import { useAuth } from "@/context/AuthCotext";
 import { Link } from "react-router";
-import { BackgroungImg, Button, Loader } from "@/components";
+import { BackgroungImg, Button, Loader, ProfileTabSection } from "@/components";
 import Avatar from "@/components/profile/Avatar";
 import { requestHandler } from "@/utils";
 import { useEffect, useState } from "react";
@@ -50,6 +49,8 @@ const EditProfile = () => {
           </Button>
         </Link>
       </div>
+      {/* Tabsection */}
+      <ProfileTabSection user={user}/>
     </div>
   );
 };
