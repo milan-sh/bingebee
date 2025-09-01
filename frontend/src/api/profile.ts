@@ -5,6 +5,10 @@ const getCurrentUserProfile =()=>{
     return apiClient.get('/users/current-user')
 }
 
+const getChannelProfile=(username:string)=>{
+    return apiClient.get(`/users/c/${username}`)
+}
+
 const updateCoverImage = (data:FormData)=>{
     return apiClient.patch(`/users/cover-image`, data)
 }
@@ -21,4 +25,4 @@ const UpdatePasswordData = (data:UpdatePassword)=>{
     return apiClient.post(`/users/change-password`, data)
 }
 
-export {updateCoverImage, getCurrentUserProfile, updateAvatar, UpdatePersonalInfoData, UpdatePasswordData}
+export {updateCoverImage, getCurrentUserProfile, updateAvatar, UpdatePersonalInfoData, UpdatePasswordData, getChannelProfile}

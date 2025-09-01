@@ -1,9 +1,8 @@
 import { useSidebar } from "@/components/ui/sidebar";
 import { useEffect, useState } from "react";
 import { requestHandler } from "@/utils/index";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { addVideoView, getVideoById } from "@/api/video";
-import { channelSubscribers } from "@/api/subscription";
 import type { FreeAPISuccessResponseInterface } from "@/interfaces/api";
 import type { Video } from "@/interfaces/video";
 import { toast } from "sonner";
@@ -16,14 +15,18 @@ import {
   SaveToPlaylistButton,
   SubscribeButton,
   VideosListView,
-  CommentSection
+  CommentSection,
 } from "@/components/index";
 import { formatSubscribersCount } from "@/utils/subscriberFromat";
+import type { ChannelProfile } from "@/interfaces/user";
+import { getChannelProfile } from "@/api/profile";
 
 const VideoDetail = () => {
   const { open, toggleSidebar } = useSidebar();
   const [video, setVideo] = useState<Video | null>(null);
-  const [subscribers, setSubscribers] = useState<number>(0);
+  const [channelProfile, setChannelProfile] = useState<ChannelProfile | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
   const { videoId } = useParams();
 
@@ -32,11 +35,8 @@ const VideoDetail = () => {
     await requestHandler(
       async () => await getVideoById(id),
       setLoading,
-      (res: FreeAPISuccessResponseInterface) => {
+      (res) => {
         setVideo(res.data);
-        if (res.data.owner._id) {
-          fetchChannelSubscribers(res.data.owner._id);
-        }
       },
       (errMssg) => {
         toast.error(errMssg || "Something went wrong");
@@ -44,13 +44,13 @@ const VideoDetail = () => {
     );
   }
 
-  //fetch channel subscribers
-  async function fetchChannelSubscribers(channelId: string) {
+  //fetch channel profile
+  async function fetchChannelProfile() {
     await requestHandler(
-      async () => await channelSubscribers(channelId),
+      async () => await getChannelProfile(video?.owner?.username),
       setLoading,
-      (res: FreeAPISuccessResponseInterface) => {
-        setSubscribers(res.data.length);
+      (res) => {
+        setChannelProfile(res.data);
       },
       (errMssg) => {
         toast.error(errMssg || "Something went wrong");
@@ -60,11 +60,11 @@ const VideoDetail = () => {
 
   async function updateVideoViews() {
     await requestHandler(
-      async()=> await addVideoView(videoId),
+      async () => await addVideoView(videoId),
       setLoading,
-      ()=>{},
-      (err)=>toast.error(err || "something went wrong")
-    )
+      () => {},
+      (err) => toast.error(err || "something went wrong")
+    );
   }
 
   useEffect(() => {
@@ -74,11 +74,18 @@ const VideoDetail = () => {
     }
   }, [videoId]);
 
+  // Separate useEffect for channel profile
+  useEffect(() => {
+    if (video?.owner?.username) {
+      fetchChannelProfile();
+    }
+  }, [video?.owner?.username]); // Runs when owner username changes
+
   useEffect(() => {
     if (open) {
       toggleSidebar();
     }
-  }, [open, toggleSidebar]);
+  }, []);
 
   if (loading) return <Loader />;
   if (!video)
@@ -135,24 +142,33 @@ const VideoDetail = () => {
           {/* avatar and subscribe button */}
           <div className="mt-6 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img
-                src={video?.owner.avatar}
-                alt={video?.owner.fullName}
-                className="w-10 h-10 rounded-full"
-              />
+              <Link to={`/${video.owner.username}`}>
+                <img
+                  src={video?.owner.avatar}
+                  alt={video?.owner.fullName}
+                  className="w-10 h-10 rounded-full"
+                />
+              </Link>
               <div>
-                <h3 className="text-lg font-semibold">
-                  {video?.owner.fullName}
-                </h3>
-                <p className="text-sm text-gray-400">{formatSubscribersCount(subscribers)}</p>
+                <Link to={`/${video.owner.username}`}>
+                  <h3 className="text-lg font-semibold">
+                    {video?.owner.fullName}
+                  </h3>
+                </Link>
+                <p className="text-sm text-gray-400">
+                  {formatSubscribersCount(channelProfile?.subscribersCount)}
+                </p>
               </div>
             </div>
-            <SubscribeButton channelId={video?.owner._id} />
+            <SubscribeButton
+              channelId={video?.owner._id}
+              status={channelProfile?.isSubscribed}
+            />
           </div>
         </div>
         {/* comments */}
         <div className="mt-3 border rounded-lg p-4">
-          <CommentSection videoId={videoId}/>
+          <CommentSection videoId={videoId} />
         </div>
       </div>
       {/* SidebarFeed */}

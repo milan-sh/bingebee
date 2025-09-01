@@ -12,12 +12,21 @@ export interface UserInterface {
 
 export interface subscribedChannel{
     _id:string;
-    subscriber:string;
-    channel:{
-        _id:string;
-        email:string;
-        username:string;
-        fullName:string;
-        avatar:string;
-    }
+    subscribersCount:number;
+    isSubscribed:boolean;
+    fullName:string;
+    username:string;
+    avatar:string;
+}
+
+export interface ChannelProfile {
+    _id:string;
+    username:string;
+    email:string;
+    fullName:string;
+    avatar:string;
+    coverImage:string;
+    subscribersCount:number;
+    channelsSubscribedToCount:number;
+    isSubscribed:boolean;
 }

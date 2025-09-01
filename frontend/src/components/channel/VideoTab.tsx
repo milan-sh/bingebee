@@ -9,7 +9,6 @@ import { Play, Plus } from "lucide-react";
 import { formatDuration } from "@/utils/durationFormat";
 import { Link } from "react-router";
 import { dateFormatter } from "@/utils/dateFormate";
-import Button from "../Button";
 import { useAuth } from "@/context/AuthCotext";
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import VideoUploadDialog from "../VideoUploadDialog";
@@ -24,7 +23,7 @@ const VideoTab = ({channelId}:{channelId:string}) => {
     //fetching channel videos
     async function fetchChannelVideos(){
         await requestHandler(
-            async ()=> await getChannelvideos(),
+            async ()=> await getChannelvideos(channelId),
             setLoading,
             (res)=> setVideos(res.data),
             (err)=> toast.error(err || "something went wrong")
@@ -32,8 +31,10 @@ const VideoTab = ({channelId}:{channelId:string}) => {
     }
 
     useEffect(()=>{
-        fetchChannelVideos()
-    } ,[])
+        if(channelId){
+            fetchChannelVideos()
+        }
+    } ,[channelId])
 
     if(loading){
         return (

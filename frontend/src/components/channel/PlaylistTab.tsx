@@ -25,8 +25,10 @@ const PlaylistTab = ({channelId}:{channelId:string}) => {
     }
 
     useEffect(()=>{
-        fetchChannelPlaylists();
-    }, [])
+        if(channelId){
+            fetchChannelPlaylists();
+        }
+    }, [channelId])
 
     if(loading){
         return (

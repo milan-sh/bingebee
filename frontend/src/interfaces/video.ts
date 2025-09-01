@@ -12,7 +12,8 @@ export interface Video {
     owner:{
         _id:string,
         fullName:string,
-        avatar:string
+        avatar:string,
+        username:string
     }
 }
 

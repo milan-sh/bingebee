@@ -1,13 +1,13 @@
 import {UserRoundPlus, UserRoundMinus} from "lucide-react"
 import Button from "./Button"
-import {toggleSubscription, isSubscribed} from "@/api/subscription.ts"
+import {toggleSubscription} from "@/api/subscription.ts"
 import {requestHandler} from "@/utils/index.ts"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
-const SubscribeButton = ({channelId}: {channelId: string}) => {
+const SubscribeButton = ({channelId, status}: {channelId: string, status:boolean}) => {
 
-  const [subscribed, setSubscribed] = useState(false)
+  const [subscribed, setSubscribed] = useState(status)
   const [loading, setLoading] = useState(false)
 
   const handleSubscribeToggle = async()=>{
@@ -18,18 +18,6 @@ const SubscribeButton = ({channelId}: {channelId: string}) => {
       (errMssg)=> toast.error(errMssg || "Something went wrong")
     )
   }
-
-  useEffect(()=>{
-    async function fetchSubscriptionStatus(){
-      await requestHandler(
-        async()=> isSubscribed(channelId),
-        setLoading,
-        (res)=> setSubscribed(res.data.status),
-        (errMssg)=> toast.error(errMssg || "Something went wrong")
-      )
-    }
-    fetchSubscriptionStatus()
-  }, [channelId])
 
   return (
     <Button className="flex items-center gap-2"

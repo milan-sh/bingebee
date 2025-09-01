@@ -4,8 +4,8 @@ const getPublicVideos = ()=>{
     return apiClient.get("/video/videos")
 }
 
-const getChannelvideos = ()=>{
-    return apiClient.get("/video/")
+const getChannelvideos = (channelId:string)=>{
+    return apiClient.get(`/video/videos/${channelId}`)
 }
 
 const uploadAVideo = (data)=>{

@@ -18,14 +18,20 @@ const TweetTab = ({ channelId }: { channelId: string }) => {
     await requestHandler(
       async () => await fetchUserTweets(channelId),
       setLoading,
-      (res) => setTweets(res.data),
+      (res) => {
+        if (res.data.length > 0) {
+          setTweets(res.data);
+        }
+      },
       (err) => toast.error(err || "something went wrong")
     );
   }
 
   useEffect(() => {
-    fetchTweets();
-  }, []);
+    if (channelId) {
+      fetchTweets();
+    }
+  }, [channelId]);
 
   if (loading) {
     return (
@@ -40,8 +46,8 @@ const TweetTab = ({ channelId }: { channelId: string }) => {
       <TabsContent
         value="tweets"
         className="flex flex-col items-center justify-center gap-2 py-4"
-      > 
-      <TweetForm channelId={channelId} fetchTweets={fetchTweets}/>
+      >
+        <TweetForm channelId={channelId} fetchTweets={fetchTweets} />
         <div className="flex items-center justify-center bg-primary p-2 rounded-full">
           <Users />
         </div>
