@@ -174,7 +174,7 @@ const getVideoById = asyncHandler(async (req, res) => {
     throw new ApiError(400, "No video found")
   }
 
-  const video = await Video.findById(videoId).populate({path:"owner", select:"fullName avatar"})
+  const video = await Video.findById(videoId).populate({path:"owner", select:"fullName avatar username"})
 
   return res
   .status(200)

@@ -77,9 +77,54 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid user Id");
   }
 
-  const channels = await Subscription.find({
-    subscriber: subscriberId,
-  }).populate("channel", "_id username fullName avatar email");
+
+  const channels = await Subscription.aggregate([
+    {
+      $match: {
+        subscriber: new mongoose.Types.ObjectId(subscriberId)
+      }
+    },
+    {
+      $lookup:{
+        from:"users",
+        localField:"channel",
+        foreignField:"_id",
+        as:"channelProfile",
+      },
+    },
+    {
+      $lookup:{
+        from:"subscriptions",
+        localField:"channel",
+        foreignField:"channel",
+        as:"subscribers"
+      }
+    },
+    {$unwind: {path: "$channelProfile", }},
+    {
+      $addFields:{
+        subscribersCount:{
+          $size: "$subscribers"
+        },
+        isSubscribed:{
+          $cond:{
+            if: {$in: [req.user?._id, "$subscribers.subscriber"]},
+            then: true,
+            else:false
+          }
+        }
+      }
+    },
+    {
+      $project:{
+        avatar:"$channelProfile.avatar",
+        username:"$channelProfile.username",
+        fullName:"$channelProfile.fullName",
+        subscribersCount:1,
+        isSubscribed:1
+      }
+    }
+  ])
 
   if (channels.length === 0) {
     return res
