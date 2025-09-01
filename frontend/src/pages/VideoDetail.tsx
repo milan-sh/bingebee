@@ -20,6 +20,7 @@ import {
 import { formatSubscribersCount } from "@/utils/subscriberFromat";
 import type { ChannelProfile } from "@/interfaces/user";
 import { getChannelProfile } from "@/api/profile";
+import { addVideoToWatchHistory } from "@/api/history";
 
 const VideoDetail = () => {
   const { open, toggleSidebar } = useSidebar();
@@ -67,10 +68,20 @@ const VideoDetail = () => {
     );
   }
 
+  async function addingVideoToWatchHistory(videoId:string) {
+    await requestHandler(
+      async()=> await addVideoToWatchHistory(videoId),
+      setLoading,
+      ()=>{},
+      (err)=> toast.error(err || "something went wrong.")
+    )
+  }
+
   useEffect(() => {
     if (videoId) {
       fetchVideo(videoId);
       updateVideoViews();
+      addingVideoToWatchHistory(videoId)
     }
   }, [videoId]);
 
