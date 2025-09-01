@@ -4,7 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 import { deleteFromCloudinary } from "../utils/destroyCloudinaryUrl.js";
 const generateAcessAndRefreshTokens = async (userId) => {
   try {
@@ -364,7 +364,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 
   //deleting existed cover image from cloudinary
   const existedUser = await User.findById(req.user?._id);
-  await deleteFromCloudinary(existedUser?.coverImage);  
+  await deleteFromCloudinary(existedUser?.coverImage);
 
   const user = await User.findByIdAndUpdate(
     req.user?._id,
@@ -460,6 +460,32 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
     );
 });
 
+const addVideoToWatchHistory = asyncHandler(async (req, res) => {
+  const { videoId } = req.params;
+
+  if (!isValidObjectId(videoId)) {
+    throw new ApiError(400, "Invalid videoId");
+  }
+
+  // Remove if exists
+  await User.findByIdAndUpdate(req.user?._id, {
+    $pull: { watchHistory: videoId },
+  });
+
+  //add to beginning (most recent first)
+  await User.findByIdAndUpdate(req.user?._id, {
+    $push: {
+      watchHistory: { $each: [videoId], $position: 0 },
+    },
+  });
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, {}, "video added to watch history successfully")
+    );
+});
+
 const getWatchHistory = asyncHandler(async (req, res) => {
   const user = await User.aggregate([
     {
@@ -534,5 +560,6 @@ export {
   updateUserAvatar,
   updateUserCoverImage,
   getUserChannelProfile,
+  addVideoToWatchHistory,
   getWatchHistory,
 };
