@@ -7,7 +7,8 @@ import {
   deleteVideo,
   togglePublishStatus,
   getPublicVideos,
-  addVideoView
+  addVideoView,
+  getcahnnelVideos
 } from "../controllers/video.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
@@ -35,6 +36,7 @@ router.route("/").post(
 );
 
 router.route("/:videoId").get(verifyJWT, getVideoById);
+router.route("/videos/:channelId").get(verifyJWT, getcahnnelVideos)
 router.route("/addView/:videoId").patch(verifyJWT, addVideoView)
 router.route("/:videoId").patch(verifyJWT, upload.single("thumbnail"), updateVideo);
 router.route("/:videoId").delete(verifyJWT, deleteVideo);

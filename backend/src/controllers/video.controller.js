@@ -1,7 +1,7 @@
 import { Video } from "../models/video.model.js";
 import { User } from "../models/user.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import mongoose from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
@@ -101,6 +101,28 @@ const getAllVideos = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, videos, "All videos fetched successfully"));
 });
+
+const getcahnnelVideos = asyncHandler(async (req, res)=>{
+  const {channelId} = req.params;
+
+  if(!isValidObjectId(channelId)){
+    throw new ApiError(400, "Invalid video id")
+  }
+
+  const videos = await Video.find({owner: channelId})
+
+  if(videos.length===0){
+    throw new ApiError(404, "NO video found")
+  }
+
+  return res
+  .status(200)
+  .json(new ApiResponse(
+    200,
+    videos,
+    "videos fetched successfully"
+  ))
+})
 
 const publishAVideo = asyncHandler(async(req, res)=>{
 
@@ -322,4 +344,4 @@ const addVideoView = asyncHandler(async(req, res)=>{
 
 })
 
-export { getAllVideos,publishAVideo, getVideoById, updateVideo, deleteVideo, togglePublishStatus, getPublicVideos, addVideoView };
+export { getAllVideos,publishAVideo, getVideoById, updateVideo, deleteVideo, togglePublishStatus, getPublicVideos, addVideoView, getcahnnelVideos };

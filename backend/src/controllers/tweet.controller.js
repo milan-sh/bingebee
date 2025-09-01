@@ -91,7 +91,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
   const userTweets = await Tweet.aggregate([
     {
       $match: {
-        owner: new mongoose.Types.ObjectId(req.user?._id),
+        owner: new mongoose.Types.ObjectId(userId),
       },
     },
     {
@@ -121,7 +121,15 @@ const getUserTweets = asyncHandler(async (req, res) => {
   ]);
 
   if (!userTweets.length) {
-    throw new ApiError(404, "No tweets found");
+    return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        [],
+        "no tweet found"
+      )
+    )
   }
 
   return res
