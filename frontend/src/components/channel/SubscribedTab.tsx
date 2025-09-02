@@ -66,7 +66,7 @@ const SubscribedTab = ({ channelId }: { channelId: string }) => {
           className="w-full flex items-center justify-between"
         >
           <div className="flex gap-2">
-            <Link to={`/${channel.username}`}>
+            <Link to={`/c/${channel.username}`}>
               <img
               src={channel?.avatar}
               alt={channel?.avatar}

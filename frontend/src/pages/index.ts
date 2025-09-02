@@ -7,5 +7,6 @@ import Channel from "./Channel"
 import EditProfile from './EditProfile';
 import History from './History';
 import Collection from './Collection';
+import Subscriptions from './Subscriptions';
 
-export { Home, Login, Signup, VideoDetail, Dashboard, Channel, EditProfile, History, Collection };
+export { Home, Login, Signup, VideoDetail, Dashboard, Channel, EditProfile, History, Collection, Subscriptions };
