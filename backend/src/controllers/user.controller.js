@@ -6,6 +6,8 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
 import mongoose, { isValidObjectId } from "mongoose";
 import { deleteFromCloudinary } from "../utils/destroyCloudinaryUrl.js";
+import nodemailer from "nodemailer";
+
 const generateAcessAndRefreshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -549,6 +551,37 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     );
 });
 
+const visitorFeedback = asyncHandler(async (req, res) => {
+  const { feedback } = req.body;
+
+  if (!feedback.trim()) {
+    throw new ApiError(400, "Feedback message is required");
+  }
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.USER,
+      pass: process.env.PASS,
+    },
+  });
+
+  await transporter.sendMail({
+    from: `"Feedback" <binge2bee@gmail.com>`,
+    to: "binge2bee@gmail.com",
+    subject: "New Feedback Received",
+    text: feedback,
+  });
+
+  return res
+  .status(200)
+  .json(new ApiResponse(
+    200,
+    {},
+    "feedback sent successfully"
+  ))
+});
+
 export {
   regsiterUser,
   loginUser,
@@ -562,4 +595,5 @@ export {
   getUserChannelProfile,
   addVideoToWatchHistory,
   getWatchHistory,
+  visitorFeedback
 };
