@@ -43,7 +43,7 @@ const items = [
   {
     name: "Subscriptions",
     icon: UserCheck,
-    link: "#",
+    link: "/subscriptions",
   },
 ];
 export function AppSidebar() {

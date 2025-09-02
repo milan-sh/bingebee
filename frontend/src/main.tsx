@@ -6,6 +6,7 @@ import {Channel, Collection, Dashboard, EditProfile, History, Home, Login, Signu
 import {AuthProvider} from "./context/AuthCotext.tsx"
 import MainLayout from './layout/MainLayout.tsx'
 import AuthLayout from './layout/AuthLayout.tsx'
+import NotFound from './components/NotFound.tsx'
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
         element:<VideoDetail/>
       },
       {
-        path:"/:username",
+        path:"/c/:username",
         element:<Channel/>
       },
       {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
         element:<Signup/>
       }
     ]
+  },
+  {
+    path:"*",
+    element:<NotFound/>
   }
 ])
 

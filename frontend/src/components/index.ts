@@ -17,5 +17,7 @@ import TabSection from "./channel/TabSection";
 import BackgroungImg from "./profile/BackgroungImg";
 import { EditProfile } from "@/pages";
 import ProfileTabSection from "./profile/ProfileTabSection";
+import NotFound from "./NotFound";
 
-export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, LikeDislike, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable, TabSection, BackgroungImg, EditProfile, ProfileTabSection };
+
+export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, LikeDislike, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable, TabSection, BackgroungImg, EditProfile, ProfileTabSection, NotFound };

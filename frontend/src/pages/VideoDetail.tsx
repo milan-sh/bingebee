@@ -153,7 +153,7 @@ const VideoDetail = () => {
           {/* avatar and subscribe button */}
           <div className="mt-6 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Link to={`/${video.owner.username}`}>
+              <Link to={`/c/${video.owner.username}`}>
                 <img
                   src={video?.owner.avatar}
                   alt={video?.owner.fullName}
@@ -161,7 +161,7 @@ const VideoDetail = () => {
                 />
               </Link>
               <div>
-                <Link to={`/${video.owner.username}`}>
+                <Link to={`/c/${video.owner.username}`}>
                   <h3 className="text-lg font-semibold">
                     {video?.owner.fullName}
                   </h3>
