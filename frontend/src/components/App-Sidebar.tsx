@@ -33,12 +33,12 @@ const items = [
   {
     name: "My Content",
     icon: Video,
-    link: "#",
+    link: "/dashboard",
   },
   {
     name: "Collections",
     icon: Folder,
-    link: "#",
+    link: "/collection",
   },
   {
     name: "Subscriptions",

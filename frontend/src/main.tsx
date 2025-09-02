@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {Channel, Dashboard, EditProfile, History, Home, Login, Signup, VideoDetail} from "./pages/index.ts"
+import {Channel, Collection, Dashboard, EditProfile, History, Home, Login, Signup, VideoDetail} from "./pages/index.ts"
 import {AuthProvider} from "./context/AuthCotext.tsx"
 import MainLayout from './layout/MainLayout.tsx'
 import AuthLayout from './layout/AuthLayout.tsx'
@@ -39,6 +39,10 @@ const router = createBrowserRouter([
       {
         path:"/history",
         element:<History/>
+      },
+      {
+        path:"/collection",
+        element:<Collection/>
       }
     ]
   },

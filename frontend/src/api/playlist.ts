@@ -16,4 +16,8 @@ function removeVideoFromPlaylist(playlistId:string, videoId:string){
     return apiClient.patch(`/playlists/remove/${videoId}/${playlistId}`);
 }
 
-export { createPlaylist, getAllPlaylist, addVideoToPlaylist, removeVideoFromPlaylist };
+function deletePlaylist(playlistId:string){
+    return apiClient.delete(`/playlists/${playlistId}`)
+}
+
+export { createPlaylist, getAllPlaylist, addVideoToPlaylist, removeVideoFromPlaylist, deletePlaylist };

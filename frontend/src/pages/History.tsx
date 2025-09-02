@@ -30,15 +30,15 @@ const History = () => {
   }, [])
 
   if (loading) {
-    <div>
+    <div className="min-h-screen">
       <Loader />{" "}
     </div>;
   }
 
   if (!watchHistory || watchHistory?.length === 0) {
     return (
-      <div className="text-white w-full p-4">
-        <h1 className="md:text-4xl text-lg font-semibold">Watch history</h1>
+      <div className="text-white w-full p-6 mt-4">
+        <h1 className="md:text-4xl text-xl font-semibold">Watch history</h1>
         <div className="h-[50vh] w-full flex flex-col items-center justify-center gap-4 text-white">
             <div className="p-2 bg-accent rounded-full text-primary"><ClockAlert size={32} /></div>
           <h2 className="text-lg">Looks like you haven't watched anything :(</h2>
