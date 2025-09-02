@@ -76,14 +76,16 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem className="border border-white mb-2">
-                <SidebarMenuButton className="flex items-center gap-2 cursor-pointer ">
-                  <CircleQuestionMark
-                    style={{ height: "1.6em", width: "1.6em" }}
-                  />
-                  <span className="md:text-lg">Support</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <Link to={"/support"}>
+                <SidebarMenuItem className="border border-white mb-2">
+                  <SidebarMenuButton className="flex items-center gap-2 cursor-pointer ">
+                    <CircleQuestionMark
+                      style={{ height: "1.6em", width: "1.6em" }}
+                    />
+                    <span className="md:text-lg">Support</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </Link>
               <SidebarMenuItem className="border border-white mb-2">
                 <SidebarMenuButton className="flex items-center gap-2 cursor-pointer ">
                   <Settings style={{ height: "1.6em", width: "1.6em" }} />

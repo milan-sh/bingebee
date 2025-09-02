@@ -8,5 +8,6 @@ import EditProfile from './EditProfile';
 import History from './History';
 import Collection from './Collection';
 import Subscriptions from './Subscriptions';
+import Support from './Support';
 
-export { Home, Login, Signup, VideoDetail, Dashboard, Channel, EditProfile, History, Collection, Subscriptions };
+export { Home, Login, Signup, VideoDetail, Dashboard, Channel, EditProfile, History, Collection, Subscriptions, Support };
