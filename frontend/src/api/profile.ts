@@ -1,5 +1,6 @@
 import type { UpdatePassword, UpdatePersonalInfo } from "@/interfaces/profile"
 import { apiClient } from "./axios"
+import type { Feedback } from "@/interfaces/user"
 
 const getCurrentUserProfile =()=>{
     return apiClient.get('/users/current-user')
@@ -25,4 +26,8 @@ const UpdatePasswordData = (data:UpdatePassword)=>{
     return apiClient.post(`/users/change-password`, data)
 }
 
-export {updateCoverImage, getCurrentUserProfile, updateAvatar, UpdatePersonalInfoData, UpdatePasswordData, getChannelProfile}
+const SendFeedback= (data:Feedback)=>{
+    return apiClient.post(`/users/feedback`, data)
+}
+
+export {updateCoverImage, getCurrentUserProfile, updateAvatar, UpdatePersonalInfoData, UpdatePasswordData, getChannelProfile, SendFeedback}

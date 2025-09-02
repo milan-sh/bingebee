@@ -4,12 +4,19 @@ import { toast } from "sonner";
 
 const Support = () => {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null)
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
   const handleClick =(e:React.MouseEvent<HTMLButtonElement>)=>{
     if(email.trim() === "") return;
+    if(!emailRegex.test(email)){
+      setError("Please enter a valid email address.")
+      return;
+    }
     e.preventDefault();
     toast.success("We'll notify you soon.")
     setEmail("")
+    setError("")
   }
 
   return (
@@ -35,6 +42,7 @@ const Support = () => {
           Notify Me
         </button>
       </div>
+      {error && <p className="text-red-600 mt-2 text-left">{error}</p>}
     </div>
   );
 };

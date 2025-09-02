@@ -30,3 +30,7 @@ export interface ChannelProfile {
     channelsSubscribedToCount:number;
     isSubscribed:boolean;
 }
+
+export interface Feedback {
+    feedback:string
+}

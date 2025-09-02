@@ -5,7 +5,7 @@ import {
   UserCheck,
   Video,
   CircleQuestionMark,
-  Settings,
+  MessageSquareWarning,
 } from "lucide-react";
 import {
   Sidebar,
@@ -18,6 +18,8 @@ import {
   SidebarTrigger,
 } from "./ui/sidebar";
 import { Link } from "react-router";
+import { Sheet, SheetTrigger } from "./ui/sheet";
+import SheetContentCom from "./SheetContentCom";
 
 const items = [
   {
@@ -86,12 +88,17 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </Link>
-              <SidebarMenuItem className="border border-white mb-2">
-                <SidebarMenuButton className="flex items-center gap-2 cursor-pointer ">
-                  <Settings style={{ height: "1.6em", width: "1.6em" }} />
-                  <span className="md:text-lg">Settings</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <SidebarMenuItem className="border border-white mb-2">
+                    <SidebarMenuButton className="flex items-center gap-2 cursor-pointer ">
+                      <MessageSquareWarning style={{ height: "1.6em", width: "1.6em" }} />
+                      <span className="md:text-lg">Send feedback</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SheetTrigger>
+                <SheetContentCom/>
+              </Sheet>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
