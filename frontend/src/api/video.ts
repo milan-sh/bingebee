@@ -32,4 +32,9 @@ const addVideoView = (videoId:string)=>{
     return apiClient.patch(`/video/addView/${videoId}`)
 }
 
-export {getPublicVideos, getChannelvideos,uploadAVideo,getVideoById,toggleVideoPublish,deleteVideo,updateVideoDetails, addVideoView}
+
+const searchVideos = (query:string, page=1, limit=10)=>{
+    return apiClient.get("/video/", {params: {query, page, limit, sortBy: "createdAt", sortType: "desc",}})
+}
+
+export {getPublicVideos, getChannelvideos,uploadAVideo,getVideoById,toggleVideoPublish,deleteVideo,updateVideoDetails, addVideoView, searchVideos}

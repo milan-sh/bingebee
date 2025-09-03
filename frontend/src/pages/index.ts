@@ -9,5 +9,6 @@ import History from './History';
 import Collection from './Collection';
 import Subscriptions from './Subscriptions';
 import Support from './Support';
+import Result from './Result';
 
-export { Home, Login, Signup, VideoDetail, Dashboard, Channel, EditProfile, History, Collection, Subscriptions, Support };
+export { Home, Login, Signup, VideoDetail, Dashboard, Channel, EditProfile, History, Collection, Subscriptions, Support, Result };
