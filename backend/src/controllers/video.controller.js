@@ -43,19 +43,20 @@ const getAllVideos = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid page or limit value");
   }
 
-  if (!req.user) {
-    throw new ApiError(401, "Unauthorized Access");
-  }
-  const userId = req.user?._id;
+  // Search match conditions
   const match = {
-    ...(query ? { title: { $regex: query, $options: "i" } } : {}), //If query exists, match titles that contain the search term (case-insensitive)
-    ...(userId ? { owner: new mongoose.Types.ObjectId(userId) } : {}), //If userId exists, filter videos by that owner
-    //spread the filter in the condition is true
+    ...(query
+      ? {
+          $or: [
+            { title: { $regex: query, $options: "i" } },
+            { description: { $regex: query, $options: "i" } },
+          ],
+        }
+      : {}),
   };
+
   const videos = await Video.aggregate([
-    {
-      $match: match,
-    },
+    { $match: match },
     {
       $lookup: {
         from: "users",
@@ -66,31 +67,39 @@ const getAllVideos = asyncHandler(async (req, res) => {
     },
     {
       $project: {
-        videoFile: 1,
         thumbnail: 1,
         title: 1,
         description: 1,
         duration: 1,
         views: 1,
         isPublished: 1,
-        createdAt:1,
-        owner: {
-          $first: "$videosOwner", // Extracts the first user object from the array
+        createdAt: 1,
+        owner: { 
+          $arrayElemAt: [
+            {
+              $map:{
+                input: "$videosOwner",
+                as:"user",
+                in:{
+                  _id:"$$user._id",
+                  username:"$$user.username",
+                  fullName:"$$user.fullName",
+                  avatar:"$$user.avatar"
+                }
+              }
+            },
+            0
+          ]
         },
       },
     },
     {
       $sort: {
-        [sortBy]: sortType === "desc" ? -1 : 1, //taking the dynamic field name on which we are sorting
-        //and if sortType is desc then make it in descending otherwise is ascending order
+        [sortBy]: sortType === "desc" ? -1 : 1,
       },
     },
-    {
-      $skip: (page - 1) * parseInt(limit), //skipping records for pagination
-    },
-    {
-      $limit: parseInt(limit), //limits the number of results per page
-    },
+    { $skip: (page - 1) * parseInt(limit) },
+    { $limit: parseInt(limit) },
   ]);
 
   if (!videos.length) {
@@ -99,8 +108,9 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, videos, "All videos fetched successfully"));
+    .json(new ApiResponse(200, videos, "Videos fetched successfully"));
 });
+
 
 const getcahnnelVideos = asyncHandler(async (req, res)=>{
   const {channelId} = req.params;

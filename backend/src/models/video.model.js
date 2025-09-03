@@ -12,11 +12,13 @@ const videoSchema = new Schema({
     },
     title:{
         type:String,
-        required:true
+        required:true,
+        index:true
     },
     description:{
         type:String,
-        required:true
+        required:true,
+        index:true
     },
     duration:{
         type:Number, //this we'll get from cloudinary
