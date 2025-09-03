@@ -17,7 +17,7 @@ const UserProfile = () => {
       <DropdownMenu>
         <DropdownMenuTrigger className="cursor-pointer" asChild>
           <img
-            className="h-10 w-10 rounded-full object-cover"
+            className="h-10 min-w-10 rounded-full object-cover"
             src={user?.avatar}
             alt={user?.fullName}
           />
