@@ -1,10 +1,10 @@
 import { toggleVideoLike, videoAlreadyLiked } from "@/api/like";
 import { requestHandler } from "@/utils";
-import { ThumbsDown, ThumbsUp } from "lucide-react";
+import { ThumbsUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-const LikeDislike = ({ videoId }: { videoId: string }) => {
+const Like = ({ videoId }: { videoId: string }) => {
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -21,12 +21,6 @@ const LikeDislike = ({ videoId }: { videoId: string }) => {
         toast.error(errMssg || "Something went wrong");
       }
     );
-  };
-
-  const handleDislike = async () => {
-    // TODO: implement dislike functionality at backend
-    if (liked) setLiked(false);
-    setDisliked((prev) => !prev);
   };
 
   const checkIfVideoLiked = async () => {
@@ -51,19 +45,12 @@ const LikeDislike = ({ videoId }: { videoId: string }) => {
       <button
         onClick={handleLike}
         disabled={loading}
-        className="px-4 py-1.5 flex items-center gap-2 bg-black rounded-l-lg hover:bg-neutral-900 cursor-pointer"
+        className="px-4 py-1.5 flex items-center gap-2 bg-black rounded-lg hover:bg-neutral-900 cursor-pointer"
       >
         <ThumbsUp size={20} fill={liked ? "white" : "transparent"} />
-      </button>
-      <button
-        onClick={handleDislike}
-        disabled={loading}
-        className="px-4 py-1.5 flex items-center gap-2 bg-black rounded-r-lg hover:bg-neutral-900 cursor-pointer"
-      >
-        <ThumbsDown size={20} fill={disliked ? "white" : "transparent"} />
       </button>
     </div>
   );
 };
 
-export default LikeDislike;
+export default Like;

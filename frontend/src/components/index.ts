@@ -7,7 +7,7 @@ import UserProfile from "./UserProfile";
 import VideoUploadDialog from "./VideoUploadDialog";
 import Button from "./Button";
 import LoadingSvg from "./LoadingSvg";
-import LikeDislike from "./LikeDislike";
+import Like from "./Like";
 import SaveToPlaylistButton from "./SaveToPlaylistButton";
 import SubscribeButton from "./SubscribeButton";
 import VideosListView from "./VideosListView";
@@ -20,4 +20,4 @@ import ProfileTabSection from "./profile/ProfileTabSection";
 import NotFound from "./NotFound";
 
 
-export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, LikeDislike, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable, TabSection, BackgroungImg, EditProfile, ProfileTabSection, NotFound };
+export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, Like, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable, TabSection, BackgroungImg, EditProfile, ProfileTabSection, NotFound };

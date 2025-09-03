@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import { requestHandler } from "@/utils/index";
 import { Link, useParams } from "react-router";
 import { addVideoView, getVideoById } from "@/api/video";
-import type { FreeAPISuccessResponseInterface } from "@/interfaces/api";
 import type { Video } from "@/interfaces/video";
 import { toast } from "sonner";
 import ReactPlayer from "react-player";
 import { dateFormatter } from "@/utils/dateFormate";
 import { Frown } from "lucide-react";
 import {
-  LikeDislike,
+  Like,
   Loader,
   SaveToPlaylistButton,
   SubscribeButton,
@@ -144,9 +143,9 @@ const VideoDetail = () => {
                 {video?.views} views · {dateFormatter(video?.createdAt)}
               </p>
             </div>
-            {/* like, dislike, save to playlist buttons */}
+            {/* like, share, save to playlist buttons */}
             <div className="flex items-center justify-between gap-4">
-              <LikeDislike videoId={videoId} />
+              <Like videoId={videoId} />
               <SaveToPlaylistButton videoId={videoId} />
             </div>
           </div>
