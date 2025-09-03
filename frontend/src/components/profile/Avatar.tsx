@@ -67,7 +67,7 @@ const Avatar = ({ user }: { user: UserInterface }) => {
       <img
         src={user?.avatar}
         alt={user?.fullName}
-        className="h-28 min-w-28 -translate-y-7 rounded-full object-cover border-2"
+        className="min-h-28 h-28 min-w-28 w-28 -translate-y-7 rounded-full object-cover border-2"
       />
       <Dialog>
         <DialogTrigger>

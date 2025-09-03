@@ -143,7 +143,7 @@ const VideoTableRow = ({
                 <Trash2 size={20} />
               </button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] md:h-42 w-fit fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-neutral-800 p-4 rounded-lg">
+            <DialogContent className="sm:max-w-[425px] md:h-42 w-80 fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-neutral-800 p-4 rounded-lg">
               <DialogHeader>
                 <DialogTitle className="text-lg md:text-2xl font-semibold flex items-center gap-2">
                   <Trash2 color="red" /> Delete Video
@@ -181,7 +181,7 @@ const VideoTableRow = ({
                   <Pencil size={20} />
                 </button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] md:h-[75vh] overflow-auto fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-neutral-800 p-2 rounded-lg">
+              <DialogContent className="sm:max-w-[425px] md:h-[75vh] w-[95vw] md:w-2xl z-50 overflow-auto fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-neutral-800 p-4 rounded-lg">
                 <DialogHeader>
                   <DialogTitle className="text-lg md:text-xl font-semibold">
                     Edit Video
@@ -205,7 +205,7 @@ const VideoTableRow = ({
                       accept="image/*"
                       {...register("thumbnail", {required: "Thumbnail is required", validate: files=>files && files?.length===1 || "Please upload 1 image"})}
                     />
-                    <img src={thumbnailPreview} alt="Thumbnail Preview"/>
+                    <img src={thumbnailPreview} alt="Thumbnail Preview" className="mx-auto"/>
                   </label>
                   {errors.thumbnail && <p className="text-red-600 my-0.5">{errors.thumbnail.message as string}.</p>}
                   <Input 

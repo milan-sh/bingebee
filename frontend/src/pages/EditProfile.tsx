@@ -43,7 +43,7 @@ const EditProfile = () => {
             <p className="text-sm text-gray-400">@{user?.username}</p>
           </div>
         </div>
-        <Link to={`/channel/${user?._id}`}>
+        <Link to={`/c/${user?.username}`}>
           <Button className="flex gap-2 items-center text-lg">
             View Channel
           </Button>

@@ -82,7 +82,7 @@ const Home = () => {
               </div>
               <div className="flex gap-1 py-1 mt-1">
                 <img
-                  className="min-w-10 h-10 object-cover rounded-full"
+                  className="min-w-10 w-10 h-10 object-cover rounded-full"
                   src={video.owner.avatar}
                   alt={video.owner.fullName}
                 />
