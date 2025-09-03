@@ -115,12 +115,12 @@ const SaveToPlaylistButton = ({ videoId }: { videoId: string }) => {
                 <Checkbox
                   id={playlist._id}
                   disabled={savingToPlaylist}
-                  checked={playlist.videos.includes(videoId)}
+                  checked={playlist.videos[0]?._id===videoId}
                   onClick={() =>
                     handleChange(
                       playlist._id,
                       videoId,
-                      playlist.videos.includes(videoId)
+                      playlist.videos[0]?._id===videoId
                     )
                   }
                 />
