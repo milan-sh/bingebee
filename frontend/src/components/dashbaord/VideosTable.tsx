@@ -23,7 +23,6 @@ const VideosTable = () => {
 
     const [loading, setLoading] = useState(false);
     const [videos, setVideos] = useState<Video[] | null>(null);
-    const [toggling, setToggling] = useState(false);
 
     async function fetchVideos() {
             await requestHandler(
@@ -51,7 +50,7 @@ const VideosTable = () => {
     const handlePublishToggle = async(videoId:string)=>{
         await requestHandler(
             async ()=> await toggleVideoPublish(videoId),
-            setToggling,
+            setLoading,
             ()=>{
                 toast.success("Video publish status toggled.");
                 fetchVideos();

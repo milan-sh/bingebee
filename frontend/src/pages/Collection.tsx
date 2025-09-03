@@ -30,6 +30,7 @@ const Collection = () => {
   
 
   async function fetchPlaylists() {
+    if(!user?._id) return;
       await requestHandler(
         async () => await getAllPlaylist(user?._id),
         setLoading,

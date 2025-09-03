@@ -20,6 +20,7 @@ const Subscriptions = () => {
   const { user } = useAuth();
 
   async function fetchSubscribedTo() {
+    if(!user?._id) return;
     await requestHandler(
       async () => await subscribedChannels(user?._id),
       setLoading,

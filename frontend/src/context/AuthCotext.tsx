@@ -1,6 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from "react"
 import {LocalStorage, requestHandler} from "../utils/index"
-import type {SignupFormValues, LoginFormValues} from "../interfaces/form"
+import type {LoginFormValues} from "../interfaces/form"
 import type { UserInterface } from "@/interfaces/user"
 import {loginUser, regsiterUser, logoutUser} from "../api/auth"
 import { useNavigate } from "react-router"
@@ -51,7 +51,7 @@ const AuthProvider = ({children}: {children: React.ReactNode})=>{
     }
 
     //Function to handle user registeration
-    const register = async(data: SignupFormValues)=>{
+    const register = async(data: FormData)=>{
         await requestHandler(
             async ()=> await regsiterUser(data),
             setIsLoading,

@@ -16,7 +16,7 @@ import { updateCoverImage } from "@/api/profile";
 import { toast } from "sonner";
 import type { UserInterface } from "@/interfaces/user";
 
-const BackgroungImg = ({user}:{user:UserInterface}) => {
+const BackgroungImg = ({ user }: { user: UserInterface }) => {
   const {
     register,
     handleSubmit,
@@ -31,37 +31,41 @@ const BackgroungImg = ({user}:{user:UserInterface}) => {
       if (name === "coverImage") {
         const file = value.coverImage?.[0];
         if (file) {
-          const previewUrl = URL.createObjectURL(file);
-          setBgImgPreview(previewUrl);
+          if (file instanceof File) {
+            const previewUrl = URL.createObjectURL(file);
+            setBgImgPreview(previewUrl);
 
-          //cleanup previous preview URL
-          return () => URL.revokeObjectURL(previewUrl);
+            //cleanup previous preview URL
+            return () => URL.revokeObjectURL(previewUrl);
+          }
         }
       }
     });
 
     //cleanup
-    return()=> subscribe.unsubscribe();
+    return () => subscribe.unsubscribe();
   }, [watch]);
 
-  const onSubmit = async(data:UpdateCoverImage) => {
+  const onSubmit = async (data: UpdateCoverImage) => {
     const formData = new FormData();
-    formData.append("coverImage", data.coverImage[0])
+    formData.append("coverImage", data.coverImage[0]);
 
     await requestHandler(
-        async()=> updateCoverImage(formData),
-        setLoading,
-        (res)=>{
-            toast.success("Background Image updated successfully`")
-            user.avatar = res.data.coverImage 
-
-        },
-        (err)=> toast.error(err || "something went wrong.")
-    )
+      async () => updateCoverImage(formData),
+      setLoading,
+      (res) => {
+        toast.success("Background Image updated successfully`");
+        user.avatar = res.data.coverImage;
+      },
+      (err) => toast.error(err || "something went wrong.")
+    );
   };
 
   return (
-    <div className="relative min-h-52 w-full" style={!user?.coverImage ? { border: "1px solid white" } : {}}>
+    <div
+      className="relative min-h-52 w-full"
+      style={!user?.coverImage ? { border: "1px solid white" } : {}}
+    >
       {user?.coverImage && (
         <img src={user.coverImage} className="w-full h-52 object-cover" />
       )}

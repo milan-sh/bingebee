@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { requestHandler } from "@/utils";
-import { channelSubscribers, subscribedChannels } from "@/api/subscription";
-import type { FreeAPISuccessResponseInterface } from "@/interfaces/api";
-import type { ChannelProfile, UserInterface } from "@/interfaces/user";
+import type { ChannelProfile } from "@/interfaces/user";
 import {
   formatSubscribersCount,
   formatSubscribedChannelsCount,
@@ -28,6 +26,7 @@ const Channel = () => {
 
   //fetch channel profile
   async function fetchChannelProfile() {
+    if(!username) return;
     await requestHandler(
       async()=> await getChannelProfile(username),
       setLoading,
@@ -83,11 +82,11 @@ const Channel = () => {
             </Button>
           </Link>
         ) : (
-          <SubscribeButton channelId={channel?._id} status={channel?.isSubscribed}/>
+          channel && (<SubscribeButton channelId={channel?._id} status={channel?.isSubscribed}/>)
         )}
       </div>
       {/* Tabs */}
-      <TabSection channelId={channel?._id} />
+      {channel && <TabSection channelId={channel?._id} />}
     </div>
   );
 };

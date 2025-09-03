@@ -47,6 +47,7 @@ const VideoDetail = () => {
 
   //fetch channel profile
   async function fetchChannelProfile() {
+    if(!video?.owner?.username) return;
     await requestHandler(
       async () => await getChannelProfile(video?.owner?.username),
       setLoading,
@@ -60,6 +61,7 @@ const VideoDetail = () => {
   }
 
   async function updateVideoViews() {
+    if(!videoId) return;
     await requestHandler(
       async () => await addVideoView(videoId),
       setLoading,
@@ -78,12 +80,16 @@ const VideoDetail = () => {
   }
 
   useEffect(() => {
-    if (videoId) {
-      fetchVideo(videoId);
-      updateVideoViews();
-      addingVideoToWatchHistory(videoId)
-    }
-  }, [videoId]);
+  if (!videoId) return;
+  (async () => {
+    await fetchVideo(videoId);
+    await Promise.all([
+      updateVideoViews(),
+      addingVideoToWatchHistory(videoId),
+    ]);
+  })();
+}, [videoId]);
+
 
   // Separate useEffect for channel profile
   useEffect(() => {
@@ -146,9 +152,9 @@ const VideoDetail = () => {
             </div>
             {/* like, share, save to playlist buttons */}
             <div className="flex items-center justify-between gap-4">
-              <Like videoId={videoId} />
+              {videoId && <Like videoId={videoId} />}
               <Share/>
-              <SaveToPlaylistButton videoId={videoId} />
+              {videoId && <SaveToPlaylistButton videoId={videoId} />}
             </div>
           </div>
           {/* avatar and subscribe button */}
@@ -172,15 +178,15 @@ const VideoDetail = () => {
                 </p>
               </div>
             </div>
-            <SubscribeButton
+            {channelProfile && video?.owner?._id && <SubscribeButton
               channelId={video?.owner._id}
               status={channelProfile?.isSubscribed}
-            />
+            />}
           </div>
         </div>
         {/* comments */}
         <div className="mt-3 border rounded-lg p-4">
-          <CommentSection videoId={videoId} />
+          {videoId && <CommentSection videoId={videoId} />}
         </div>
       </div>
       {/* SidebarFeed */}

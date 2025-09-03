@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import type { Comment } from "@/interfaces/comment";
-import { LocalStorage, requestHandler } from "@/utils";
+import { requestHandler } from "@/utils";
 import { getCommentsByVideoId, addComment } from "@/api/comment";
 import { toast } from "sonner";
 import Input from "./Input";
 import { formatCommentLength } from "@/utils/commentLengthFormat";
 import { dateFormatter } from "@/utils/dateFormate";
-import { EllipsisVertical, Pencil, Trash } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 
 const CommentSection = ({ videoId }: { videoId: string }) => {
   const [comments, setComments] = useState<Comment[] | null>(null);

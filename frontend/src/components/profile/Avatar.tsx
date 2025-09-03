@@ -1,7 +1,15 @@
 import type { UserInterface } from "@/interfaces/user";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import Input from "../Input";
-import {useForm} from "react-hook-form"
+import { useForm } from "react-hook-form";
 import { CloudUpload } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { UpdateAvatarImage } from "@/interfaces/form";
@@ -9,60 +17,65 @@ import { requestHandler } from "@/utils";
 import { updateAvatar } from "@/api/profile";
 import { toast } from "sonner";
 
-const Avatar = ({user}:{user:UserInterface}) => {
+const Avatar = ({ user }: { user: UserInterface }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<UpdateAvatarImage>();
+  const [profileImgPreview, setProfileImgPreview] = useState(user?.avatar);
+  const [loading, setLoading] = useState(false);
 
-  const {register, handleSubmit, formState:{errors}, watch} = useForm<UpdateAvatarImage>();
-  const [profileImgPreview, setProfileImgPreview] = useState(user?.avatar)
-  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    const subscribe = watch((value, { name }) => {
+      if (name === "avatar") {
+        const file = value.avatar?.[0];
+        if (file) {
+          if (file instanceof File) {
+            const previewURL = URL.createObjectURL(file);
+            setProfileImgPreview(previewURL);
 
-  useEffect(()=>{
-    const subscribe = watch((value, {name})=>{
-      if(name==="avatar"){
-        const file = value.avatar?.[0]
-        if(file){
-          const previewURL = URL.createObjectURL(file)
-          setProfileImgPreview(previewURL)
-
-          //cleanup previous URL
-          return ()=> URL.revokeObjectURL(previewURL)
+            //cleanup previous URL
+            return () => URL.revokeObjectURL(previewURL);
+          }
         }
       }
-    })
+    });
 
     //cleanup
-    return ()=> subscribe.unsubscribe();
-  }, [watch])
-  
+    return () => subscribe.unsubscribe();
+  }, [watch]);
 
-  const onSubmit = async(data:UpdateAvatarImage)=>{
+  const onSubmit = async (data: UpdateAvatarImage) => {
     const formData = new FormData();
-    formData.append("avatar", data.avatar[0])
+    formData.append("avatar", data.avatar[0]);
 
     await requestHandler(
-      async()=> await updateAvatar(formData),
+      async () => await updateAvatar(formData),
       setLoading,
-      (res)=>{
-        toast.success("Avatar updated successfully")
-        user.avatar = res.data.avatar
+      (res) => {
+        toast.success("Avatar updated successfully");
+        user.avatar = res.data.avatar;
       },
-      (err)=> toast.error(err || "something went wrong.")
-    )
-  }
+      (err) => toast.error(err || "something went wrong.")
+    );
+  };
 
   return (
     <div className="relative">
-            <img
-              src={user?.avatar}
-              alt={user?.fullName}
-              className="h-28 min-w-28 -translate-y-7 rounded-full object-cover border-2"
-            />
-            <Dialog>
-              <DialogTrigger>                
-                <div className="absolute top-[25%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-primary/70 hover:bg-white/50 p-2 rounded-full cursor-pointer">
-                  <CloudUpload />
-                </div>
-              </DialogTrigger>
-               <DialogContent className="md:w-2xl w-[80vw] z-50 fixed top-[50%] left-[50%] md:left-[60%] -translate-x-1/2 -translate-y-1/2 bg-neutral-900 p-4 rounded-lg">
+      <img
+        src={user?.avatar}
+        alt={user?.fullName}
+        className="h-28 min-w-28 -translate-y-7 rounded-full object-cover border-2"
+      />
+      <Dialog>
+        <DialogTrigger>
+          <div className="absolute top-[25%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-primary/70 hover:bg-white/50 p-2 rounded-full cursor-pointer">
+            <CloudUpload />
+          </div>
+        </DialogTrigger>
+        <DialogContent className="md:w-2xl w-[80vw] z-50 fixed top-[50%] left-[50%] md:left-[60%] -translate-x-1/2 -translate-y-1/2 bg-neutral-900 p-4 rounded-lg">
           <DialogHeader>
             <DialogTitle className="font-semibold text-primary text-xl">
               Update Profile Image
@@ -102,9 +115,9 @@ const Avatar = ({user}:{user:UserInterface}) => {
             </DialogFooter>
           </form>
         </DialogContent>
-            </Dialog>
-          </div>
-  )
-}
+      </Dialog>
+    </div>
+  );
+};
 
-export default Avatar
+export default Avatar;

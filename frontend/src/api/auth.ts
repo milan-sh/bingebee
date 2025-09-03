@@ -1,7 +1,7 @@
 import { apiClient } from "./axios"
-import type { SignupFormValues, LoginFormValues } from "../interfaces/form"
+import type { LoginFormValues } from "../interfaces/form"
 
-const regsiterUser = (data: SignupFormValues) => {
+const regsiterUser = (data: FormData) => {
     return apiClient.post("/users/register", data)
 }
 

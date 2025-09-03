@@ -66,11 +66,13 @@ const VideoTableRow = ({
       if(name==="thumbnail"){
         const file = value.thumbnail?.[0];
         if(file){
-          const previewUrl = URL.createObjectURL(file);
-          setThumbnailPreview(previewUrl);
-
-          //clearnup previous preview URL
-          return () => URL.revokeObjectURL(previewUrl);
+          if(file instanceof File){
+            const previewUrl = URL.createObjectURL(file);
+            setThumbnailPreview(previewUrl);
+  
+            //clearnup previous preview URL
+            return () => URL.revokeObjectURL(previewUrl);            
+          }
         }
       }
     })

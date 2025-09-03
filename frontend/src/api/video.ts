@@ -8,7 +8,7 @@ const getChannelvideos = (channelId:string)=>{
     return apiClient.get(`/video/videos/${channelId}`)
 }
 
-const uploadAVideo = (data)=>{
+const uploadAVideo = (data:FormData)=>{
     return apiClient.post("/video/", data)
 }
 

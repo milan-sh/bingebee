@@ -27,8 +27,10 @@ const Share = () => {
 
   const handleCopy = ()=>{
     ref.current?.select();
-    window.navigator.clipboard.writeText(ref.current?.value)
-    toast.success("Link copied to clipboard")
+    if(ref.current?.value){
+      window.navigator.clipboard.writeText(ref.current?.value)
+      toast.success("Link copied to clipboard")
+    }
   }
 
   return (

@@ -33,11 +33,11 @@ const EditProfile = () => {
     <div className="min-h-screen w-full text-white mt-10 md:mt-0">
       {/* profile section */}
       {/* backgroundImg */}
-      <BackgroungImg user={user}/>
+      {user && <BackgroungImg user={user}/>}
       <div className="flex flex-col md:flex-row justify-between md:items-center px-4 mb-4">
         <div className="flex gap-4 items-center">
           {/* avatarImg */}
-          <Avatar user={user}/>
+          {user && <Avatar user={user}/>}
           <div>
             <h1 className="text-lg md:text-2xl">{user?.fullName}</h1>
             <p className="text-sm text-gray-400">@{user?.username}</p>
@@ -50,7 +50,7 @@ const EditProfile = () => {
         </Link>
       </div>
       {/* Tabsection */}
-      <ProfileTabSection user={user}/>
+      {user && <ProfileTabSection user={user}/>}
     </div>
   );
 };

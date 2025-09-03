@@ -1,4 +1,4 @@
-import { Eye, Heart, Plus, User, X } from "lucide-react";
+import { Eye, Heart, Plus, User } from "lucide-react";
 import { Loader, VideoUploadDialog, VideosTable } from "../components/index.ts";
 import { useEffect, useState } from "react";
 import { requestHandler } from "@/utils/index.ts";

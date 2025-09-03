@@ -35,6 +35,7 @@ const SaveToPlaylistButton = ({ videoId }: { videoId: string }) => {
   const [savingToPlaylist, setSavingToPlaylist] = useState(false);
 
   async function fetchPlaylists() {
+      if(!user?._id) return;
       await requestHandler(
         async () => await getAllPlaylist(user?._id),
         setLoading,
@@ -77,7 +78,7 @@ const SaveToPlaylistButton = ({ videoId }: { videoId: string }) => {
       await requestHandler(
         async () => await addVideoToPlaylist(playlistId, videoId),
         setSavingToPlaylist,
-        (res) => {
+        () => {
           toast.success("Video added to playlist successfully");
         },
         (error) => {
@@ -89,7 +90,7 @@ const SaveToPlaylistButton = ({ videoId }: { videoId: string }) => {
       await requestHandler(
         async () => await removeVideoFromPlaylist(playlistId, videoId),
         setSavingToPlaylist,
-        (res) => {
+        () => {
           toast.success("Video removed from playlist successfully");
         },
         (error) => {
