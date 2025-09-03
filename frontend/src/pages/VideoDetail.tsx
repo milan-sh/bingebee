@@ -15,6 +15,7 @@ import {
   SubscribeButton,
   VideosListView,
   CommentSection,
+  Share,
 } from "@/components/index";
 import { formatSubscribersCount } from "@/utils/subscriberFromat";
 import type { ChannelProfile } from "@/interfaces/user";
@@ -146,6 +147,7 @@ const VideoDetail = () => {
             {/* like, share, save to playlist buttons */}
             <div className="flex items-center justify-between gap-4">
               <Like videoId={videoId} />
+              <Share/>
               <SaveToPlaylistButton videoId={videoId} />
             </div>
           </div>

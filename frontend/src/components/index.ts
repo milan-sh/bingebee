@@ -18,6 +18,7 @@ import BackgroungImg from "./profile/BackgroungImg";
 import { EditProfile } from "@/pages";
 import ProfileTabSection from "./profile/ProfileTabSection";
 import NotFound from "./NotFound";
+import Share from "./Share";
 
 
-export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, Like, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable, TabSection, BackgroungImg, EditProfile, ProfileTabSection, NotFound };
+export { Logo, Navbar, Footer, Input, Loader, UserProfile, VideoUploadDialog, Button, LoadingSvg, Like, SaveToPlaylistButton, SubscribeButton, VideosListView, CommentSection, VideosTable, TabSection, BackgroungImg, EditProfile, ProfileTabSection, NotFound, Share };
