@@ -63,11 +63,11 @@ const BackgroungImg = ({ user }: { user: UserInterface }) => {
 
   return (
     <div
-      className="relative min-h-52 w-full"
+      className="relative md:min-h-52 w-full"
       style={!user?.coverImage ? { border: "1px solid white" } : {}}
     >
       {user?.coverImage && (
-        <img src={user.coverImage} className="w-full h-52 object-cover" />
+        <img src={user.coverImage} className="w-full md:h-52 h-32 object-cover" />
       )}
       <Dialog>
         <DialogTrigger>

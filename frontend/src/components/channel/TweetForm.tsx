@@ -55,7 +55,7 @@ const TweetForm = ({
               <Smile size={20} />
             </button>
             {isEmojiOpen && (
-              <div className="absolute top-12 right-2 rounded-lg md:max-h-52 overflow-auto">
+              <div className="absolute top-12 -right-5 md:right-2 rounded-lg md:max-h-52 overflow-auto">
                 <Picker data={data} onEmojiSelect={handleEmojiSelect} />
               </div>
             )}

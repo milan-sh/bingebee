@@ -126,7 +126,7 @@ const Collection = () => {
                 </DialogTrigger>
                 <DialogContent className="bg-neutral-900 text-white">
                   <DialogHeader>
-                    <DialogTitle className="text-xl">
+                    <DialogTitle className="md:text-xl">
                       Do you want to delete playlist ?
                     </DialogTitle>
                     <DialogDescription>
@@ -135,11 +135,12 @@ const Collection = () => {
                   </DialogHeader>
                   <DialogFooter>
                     <DialogClose asChild>
-                      <button type="button" className="outline rounded-sm px-3 py-1.5 mr-3 cursor-pointer hover:bg-accent hover:text-black font-semibold">Close</button>
+                      <button type="button" className="outline w-full md:w-fit rounded-sm px-3 py-1.5 mr-3 cursor-pointer hover:bg-accent hover:text-black font-semibold">Cancel</button>
                     </DialogClose>
                     <Button
                       disabled={deleting}
                       onClick={()=>deletePlaylistHandler(playlist._id)}
+                      className="w-full py-2 bg-red-600 text-white"
                       type="button"
                     >
                       Delete

@@ -169,7 +169,7 @@ const VideoDetail = () => {
               </Link>
               <div>
                 <Link to={`/c/${video.owner.username}`}>
-                  <h3 className="text-lg font-semibold">
+                  <h3 className="md:text-lg font-semibold">
                     {video?.owner.fullName}
                   </h3>
                 </Link>

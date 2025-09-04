@@ -5,7 +5,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+  
+} from "@/components/ui/dropdown-menu";
 import { DropdownMenu } from "./ui/dropdown-menu";
 import { useAuth } from "../context/AuthCotext";
 import { Link } from "react-router";
@@ -23,24 +24,24 @@ const UserProfile = () => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="md:w-52 w-36 bg-accent-foreground p-2 border border-neutral-700"
+          className="md:w-52 w-40 top-2 bg-accent-foreground rounded-none p-2 border text-white text-lg border-gray-400 "
           align="end"
         >
-          <DropdownMenuLabel className="font-semibold mb-2">
+          <DropdownMenuLabel className="font-semibold p-0 pb-2 md:text-lg">
             My Account
           </DropdownMenuLabel>
           <DropdownMenuGroup>
-            <DropdownMenuItem className="cursor-pointer hover:bg-secondary-foreground py-1 px-0.5 rounded-md">
+            <DropdownMenuItem className="cursor-pointer hover:bg-primary font-semibold">
               <Link to="/dashboard">Dashboard</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer hover:bg-secondary-foreground py-1 px-0.5 rounded-md">
+            <DropdownMenuItem className="cursor-pointer hover:bg-primary font-semibold">
               <Link to={`/c/${user?.username}`}>Channel</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator className="my-1" />
           <DropdownMenuGroup>
-            <DropdownMenuItem onClick={() => logout()} className="cursor-pointer hover:bg-secondary-foreground py-1 px-0.5 rounded-md text-red-500">
-              Logout
+            <DropdownMenuItem onClick={() => logout()} className="cursor-pointer hover:bg-red-600 hover:text-white text-red-500 font-semibold">
+              Log out
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>

@@ -63,15 +63,15 @@ const Avatar = ({ user }: { user: UserInterface }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-24 md:h-auto">
       <img
         src={user?.avatar}
         alt={user?.fullName}
-        className="min-h-28 h-28 min-w-28 w-28 -translate-y-7 rounded-full object-cover border-2"
+        className="min-h-28 h-28 min-w-28 w-28 -translate-y-10 rounded-full object-cover border-2"
       />
       <Dialog>
         <DialogTrigger>
-          <div className="absolute top-[25%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-primary/70 hover:bg-white/50 p-2 rounded-full cursor-pointer">
+          <div className="absolute top-[15%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-primary/70 hover:bg-white/50 p-2 rounded-full cursor-pointer">
             <CloudUpload />
           </div>
         </DialogTrigger>

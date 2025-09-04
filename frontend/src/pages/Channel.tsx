@@ -54,9 +54,9 @@ const Channel = () => {
   return (
     <div className="min-h-screen w-full text-white mt-10 md:mt-0">
       {/* profile section */}
-      <div className="min-h-50 w-full border">
+      <div className="md:min-h-50 w-full border">
         {channel?.coverImage && (
-          <img src={channel.coverImage} className="w-full h-50 object-cover" />
+          <img src={channel.coverImage} className="w-full md:h-50 h-32 object-cover" />
         )}
       </div>
       <div className="flex flex-col md:flex-row justify-between md:items-center px-4 mb-4">
@@ -67,7 +67,7 @@ const Channel = () => {
             className="h-28 min-w-28 -translate-y-7 rounded-full object-cover border-2"
           />
           <div>
-            <h1 className="text-lg md:text-2xl">{channel?.fullName}</h1>
+            <h1 className="text-lg md:text-2xl font-semibold">{channel?.fullName}</h1>
             <p className="text-sm text-gray-400">@{channel?.username}</p>
             <p className="text-sm text-gray-400">
               {formatSubscribersCount(channel?.subscribersCount)} ·{" "}
