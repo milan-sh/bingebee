@@ -2,7 +2,7 @@ import axios from "axios"
 import { LocalStorage } from "@/utils"
 
 const apiClient = axios.create({
-    baseURL: "/api/v1",
+    baseURL: import.meta.env.VITE_SERVER_URI || "http://localhost:5000/api/v1",
     timeout: 10000, // Set a timeout of 10 seconds
     withCredentials:true, // Include credentials in requests
 })
