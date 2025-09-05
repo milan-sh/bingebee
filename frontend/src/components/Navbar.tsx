@@ -59,19 +59,19 @@ const Navbar = () => {
           <UserProfile />
         </div>
       ) : (
-        <div className="flex justify-between items-center gap-x-6">
+        <div className="flex justify-between items-center md:gap-x-6 gap-x-3">
           <Link to="/login">
-            <button className="hover:bg-secondary-foreground p-2 cursor-pointer">
+            <button className="hover:bg-secondary-foreground font-semibold md:py-1.5 py-1 cursor-pointer outline-1 outline-accent/70 px-4">
               Log in
             </button>
           </Link>
-          <div className="relative">
+          <div className="relative group">
             <Link to="/signup">
               <button className="relative font-semibold bg-primary text-black hover:text-white md:text-lg py-1 px-3 cursor-pointer z-30">
                 Sign up
               </button>
             </Link>
-            <div className="absolute md:left-3 left-1 top-1 md:h-9 h-8 w-20 bg-gray-600 z-10"></div>
+            <div className="absolute md:left-3 left-1 top-1 md:h-9 h-8 w-20 bg-gray-600 z-10 group-hover:bg-accent"></div>
           </div>
         </div>
       )}

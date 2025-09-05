@@ -20,7 +20,7 @@ const Login = () => {
     reset();
   }
   return (
-    <div className="bg-black text-white flex items-center justify-center py-8">
+    <div className="bg-black min-h-screen text-white flex justify-center py-8">
       <form className="md:w-2xl w-2xs flex flex-col gap-y-2" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-y-0.5">
           <Input
@@ -29,14 +29,6 @@ const Login = () => {
             {...register("username", { required: "Username is required" })}
           />
           {errors.username && (<p className="text-red-600">{errors.username.message}.</p>)}
-        </div>
-        <div className="flex flex-col gap-y-0.5">
-          <Input
-          label="Email"
-          type="email"
-          {...register("email", {required:"Email is required"})}
-          />
-          {errors.email && (<p className="text-red-600">{errors.email.message}.</p>)}
         </div>
         <div className="flex flex-col gap-y-0.5">
           <Input

@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-black text-white flex items-center justify-between text-sm md:text-lg font-semibold pt-8 pb-4 px-4">
       <div className="flex items-center gap-x-1">
         <Copyright style={{width:"1em", height:"1em"}}/>
-        <span>{new Date().getFullYear()} BingeBee. All rights reserved.</span>
+        <span className="text-sm md:text-lg text-gray-300 font-medium">{new Date().getFullYear()} BingeBee. All rights reserved.</span>
       </div>
       <div className="flex justify-between items-center md:gap-x-4 gap-x-2">
         <Link to="https://github.com/milan-sh" target="_blank" className="hover:text-gray-400">
