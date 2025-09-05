@@ -47,7 +47,7 @@ const VideoDetail = () => {
 
   //fetch channel profile
   async function fetchChannelProfile() {
-    if(!video?.owner?.username) return;
+    if (!video?.owner?.username) return;
     await requestHandler(
       async () => await getChannelProfile(video?.owner?.username),
       setLoading,
@@ -61,7 +61,7 @@ const VideoDetail = () => {
   }
 
   async function updateVideoViews() {
-    if(!videoId) return;
+    if (!videoId) return;
     await requestHandler(
       async () => await addVideoView(videoId),
       setLoading,
@@ -70,26 +70,25 @@ const VideoDetail = () => {
     );
   }
 
-  async function addingVideoToWatchHistory(videoId:string) {
+  async function addingVideoToWatchHistory(videoId: string) {
     await requestHandler(
-      async()=> await addVideoToWatchHistory(videoId),
+      async () => await addVideoToWatchHistory(videoId),
       setLoading,
-      ()=>{},
-      (err)=> toast.error(err || "something went wrong.")
-    )
+      () => {},
+      (err) => toast.error(err || "something went wrong.")
+    );
   }
 
   useEffect(() => {
-  if (!videoId) return;
-  (async () => {
-    await fetchVideo(videoId);
-    await Promise.all([
-      updateVideoViews(),
-      addingVideoToWatchHistory(videoId),
-    ]);
-  })();
-}, [videoId]);
-
+    if (!videoId) return;
+    (async () => {
+      await fetchVideo(videoId);
+      await Promise.all([
+        updateVideoViews(),
+        addingVideoToWatchHistory(videoId),
+      ]);
+    })();
+  }, [videoId]);
 
   // Separate useEffect for channel profile
   useEffect(() => {
@@ -116,28 +115,17 @@ const VideoDetail = () => {
   return (
     <div className="min-h-screen w-full py-8 px-4 text-white grid md:grid-cols-6 gap-2">
       <div className="w-full md:col-span-4">
-        {/* video frame for desktop */}
-        <div className="hidden md:block">
+        <div className="relative w-full pb-[56.25%]">
+          {" "}
+          {/* 16:9 ratio */}
           <ReactPlayer
             src={video?.videoFile}
-            controls={true}
-            volume={0.5}
-            width="100%"
-            height="60%"
-            pip={true}
-            autoPlay
-          />
-        </div>
-        {/* video frame for mobile */}
-        <div className="block md:hidden mt-2">
-          <ReactPlayer
-            src={video?.videoFile}
-            controls={true}
+            controls
+            playing
             volume={0.5}
             width="100%"
             height="100%"
-            pip={true}
-            autoPlay
+            className="absolute top-0 left-0"
           />
         </div>
         {/* channel operations */}
@@ -153,7 +141,7 @@ const VideoDetail = () => {
             {/* like, share, save to playlist buttons */}
             <div className="flex items-center justify-between gap-4">
               {videoId && <Like videoId={videoId} />}
-              <Share/>
+              <Share />
               {videoId && <SaveToPlaylistButton videoId={videoId} />}
             </div>
           </div>
@@ -178,10 +166,15 @@ const VideoDetail = () => {
                 </p>
               </div>
             </div>
-            {channelProfile && video?.owner?._id && <SubscribeButton
-              channelId={video?.owner._id}
-              status={channelProfile?.isSubscribed}
-            />}
+            {channelProfile && video?.owner?._id && (
+              <SubscribeButton
+                channelId={video?.owner._id}
+                status={channelProfile?.isSubscribed}
+              />
+            )}
+          </div>
+          <div className="mt-6 border-t py-2">
+            <p className="text-sm text-gray-300">{video?.description}</p>
           </div>
         </div>
         {/* comments */}

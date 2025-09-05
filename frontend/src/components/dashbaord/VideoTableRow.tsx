@@ -143,7 +143,7 @@ const VideoTableRow = ({
                 <Trash2 size={20} />
               </button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] md:h-42 w-80 fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-neutral-800 p-4 rounded-lg">
+            <DialogContent className="sm:max-w-[425px] md:h-48  w-80 fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-neutral-800 p-4 rounded-lg">
               <DialogHeader>
                 <DialogTitle className="text-lg md:text-2xl font-semibold flex items-center gap-2">
                   <Trash2 color="red" /> Delete Video
