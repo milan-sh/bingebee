@@ -8,7 +8,7 @@ import {
 
 export function Searchbar() {
   return (
-    <InputGroup className="max-w-lg ">
+    <InputGroup className="hidden md:flex lg:max-w-lg ">
       <InputGroupInput placeholder="Search..." />
       <InputGroupAddon>
         <Search />

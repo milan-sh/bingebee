@@ -10,11 +10,11 @@ export const Route = createRootRoute({
     <div>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <SidebarProvider>
+          <header className="fixed top-0 inset-x-0 z-50 h-16 bg-background border-b">
+            <Navbar />
+          </header>
           <AppSidebar />
-          <div className="flex flex-1 flex-col min-h-svh">
-            <header>
-              <Navbar />
-            </header>
+          <div className="flex flex-1 flex-col mt-16 min-h-[calc(100svh-4rem)]">
             <main className="flex-1">
               <Outlet />
             </main>
