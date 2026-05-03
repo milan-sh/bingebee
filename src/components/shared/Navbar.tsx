@@ -4,8 +4,10 @@ import { Searchbar } from "./Searchbar";
 import { ThemeToggle } from "./Themetoggle";
 import logo from "../../assets/logo.png";
 import { TextAlignJustify } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <nav className="h-16 w-full flex items-center justify-between px-1 md:px-4">
       <div className="flex items-center gap-2">
@@ -16,8 +18,19 @@ const Navbar = () => {
       </div>
       <Searchbar />
       <div className="flex items-center gap-2">
-        <Button variant="ghost" className="hidden md:flex font-semibold cursor-pointer">Sign Up</Button>
-        <Button className="font-semibold px-5 cursor-pointer">Login</Button>
+        <Button
+          onClick={() => navigate({ to: "/signup" })}
+          variant="ghost"
+          className="hidden md:flex font-semibold cursor-pointer"
+        >
+          Sign Up
+        </Button>
+        <Button
+          onClick={() => navigate({ to: "/login" })}
+          className="font-semibold px-5 cursor-pointer"
+        >
+          Login
+        </Button>
         <ThemeToggle />
       </div>
     </nav>
