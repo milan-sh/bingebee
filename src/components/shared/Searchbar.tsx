@@ -8,12 +8,12 @@ import {
 
 export function Searchbar() {
   return (
-    <InputGroup className="max-w-xs">
+    <InputGroup className="max-w-lg ">
       <InputGroupInput placeholder="Search..." />
       <InputGroupAddon>
         <Search />
       </InputGroupAddon>
-      <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
+      {/* <InputGroupAddon align="inline-end">12 results</InputGroupAddon> */}
     </InputGroup>
   )
 }
