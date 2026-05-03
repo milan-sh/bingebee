@@ -1,15 +1,18 @@
+import Navbar from "@/components/shared/Navbar";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
   component: () => (
-    <>
-      <header></header>
-      <main className="min-h-screen bg-neutral-900 text-white">
+    <div>
+      <header>
+        <Navbar/>
+      </header>
+      <main>
         <Outlet />
       </main>
       <TanStackRouterDevtools />
-    </>
+    </div>
   ),
 
   notFoundComponent: () => (
