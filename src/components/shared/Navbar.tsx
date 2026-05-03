@@ -15,9 +15,9 @@ const Navbar = () => {
         <img src={logo} alt="Logo" className="h-7 md:h-8" />
       </div>
       <Searchbar />
-      <div className="flex items-center gap-3">
-        <Button variant="outline" className="hidden md:block">Sign Up</Button>
-        <Button className="mr-2">Login</Button>
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" className="hidden md:flex font-semibold cursor-pointer">Sign Up</Button>
+        <Button className="font-semibold px-5 cursor-pointer">Login</Button>
         <ThemeToggle />
       </div>
     </nav>
