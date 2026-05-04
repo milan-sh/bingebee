@@ -4,6 +4,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ThemeProvider } from "@/hooks/theme-provider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/shared/app-sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 export const Route = createRootRoute({
   component: () => (
@@ -18,6 +19,7 @@ export const Route = createRootRoute({
             <main className="flex-1">
               <Outlet />
             </main>
+            <Toaster position="bottom-right"/>
           </div>
         </SidebarProvider>
       </ThemeProvider>
