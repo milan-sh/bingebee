@@ -1,6 +1,8 @@
 import { apiClient } from "./index.api";
 import { type LoginData } from "@/schemas/auth.schema";
+import { type ApiResponse } from "@/types/api.types";
 
-export const loging = async (data: LoginData) => {
-  await apiClient.post("/users/login", { data });
+export const login = async (data: LoginData): Promise<ApiResponse> => {
+  const response = await apiClient.post("/users/login", { data });
+  return response.data;
 };
