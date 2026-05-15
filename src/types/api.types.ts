@@ -1,8 +1,8 @@
-export type ApiSuccessResponse = {
+export type ApiSuccessResponse<T = unknown> = {
   status: number;
   success: true;
   message: string;
-  data?: unknown;
+  data?: T;
 };
 
 export type ApiErrorResponse = {
@@ -12,4 +12,4 @@ export type ApiErrorResponse = {
   error?: unknown;
 };
 
-export type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
+export type ApiResponse<T = unknown> = ApiSuccessResponse<T> | ApiErrorResponse;

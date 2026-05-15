@@ -1,5 +1,9 @@
 import Navbar from "@/components/shared/Navbar";
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
+
+interface RouterContext {
+  isAuthenticated: boolean;
+}
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ThemeProvider } from "@/hooks/theme-provider";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -9,7 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => (
     <div>
       <QueryClientProvider client={queryClient}>

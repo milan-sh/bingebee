@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,6 +21,9 @@ import { useSignup } from "@/hooks/user/useSignup";
 import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/signup")({
+  beforeLoad: ({ context }) => {
+    if (context.isAuthenticated) throw redirect({ to: "/" });
+  },
   component: RouteComponent,
 });
 
@@ -28,7 +31,6 @@ function RouteComponent() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isValid },
   } = useForm<SignupData>({
     resolver: zodResolver(signupSchema),
@@ -41,8 +43,6 @@ function RouteComponent() {
     // Handle form submission
     signup(data);
   };
-
-  const password = watch("password");
 
   return (
     <div className="flex h-full w-full items-center justify-center p-4 md:p-10">
