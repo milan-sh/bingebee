@@ -14,7 +14,6 @@ export const useLogin = () => {
     onSuccess: (response) => {
       if (response.success && response.data) {
         setUser(response.data?.user);
-        toast.success(response.message || "Logged in successfully");
         navigate({ to: "/" });
       }
     },

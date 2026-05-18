@@ -11,3 +11,7 @@ export const signup = async (data: SignupData): Promise<ApiResponse> => {
   const response = await apiClient.post("/users/register", data);
   return response.data;
 };
+
+export const logout = async (): Promise<void> => {
+  await apiClient.post("/users/logout");
+};
