@@ -5,10 +5,11 @@ import {
   formatRelativeTime,
   formatViews,
 } from "@/lib/dtformatter";
+import { Link } from "@tanstack/react-router";
 
 const VideoCard = ({ video }: { video: Video }) => {
   return (
-    <a href={`/watch/${video._id}`} className="group flex flex-col gap-3">
+    <Link to={`/watch/${video._id}`} className="group flex flex-col gap-3">
       {/* Thumbnail */}
       <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted">
         <img
@@ -42,7 +43,7 @@ const VideoCard = ({ video }: { video: Video }) => {
           </p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

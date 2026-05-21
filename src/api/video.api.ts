@@ -59,3 +59,8 @@ export const getVidoes = async (): Promise<Video[]> => {
   return data.data;
 }
 
+export const getVideoById = async (videoId: string): Promise<Video> => {
+  const { data } = await apiClient.get(`/video/${videoId}`);
+  return data.data;
+};
+
