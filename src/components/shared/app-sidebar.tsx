@@ -34,7 +34,7 @@ const MAIN_LINKS: NavLink[] = [
   { id: 1, icon: Home, name: "Home", url: "/" },
   { id: 2, icon: ThumbsUp, name: "Liked Videos", url: "/liked-videos" },
   { id: 3, icon: Clock, name: "History", url: "/history" },
-  { id: 4, icon: Video, name: "My Content", url: "/my-content" },
+  { id: 4, icon: Video, name: "My Content", url: "/dashboard" },
   { id: 5, icon: Folder, name: "Collections", url: "/collections" },
   { id: 6, icon: UserCheck, name: "Subscribers", url: "/subscribers" },
 ];
