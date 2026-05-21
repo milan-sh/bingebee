@@ -38,3 +38,14 @@ export const VideoUploadSchema = z.object({
 });
 
 export type VideoData = z.infer<typeof VideoUploadSchema>;
+
+// Edit only updates the thumbnail, title and description — the video file
+// itself can't be changed, and the thumbnail is optional (keep the existing one).
+export const VideoEditSchema = VideoUploadSchema.pick({
+  title: true,
+  description: true,
+}).extend({
+  thumbnail: VideoUploadSchema.shape.thumbnail.optional(),
+});
+
+export type VideoEditData = z.infer<typeof VideoEditSchema>;

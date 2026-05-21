@@ -7,11 +7,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Eye, Heart, LayoutDashboard, Plus, UserRound } from "lucide-react";
 import { useEffect } from "react";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import VideoUpload from "@/components/shared/dashboard/VideoUpload";
 import { useDashboardStats } from "@/hooks/dashboard/useDashboardStats";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import ChannelVideos from "@/components/shared/dashboard/ChannelVideos";
+import VideoForm from "@/components/shared/dashboard/VideoForm";
 
 export const Route = createFileRoute("/dashboard")({
   component: RouteComponent,
@@ -72,7 +72,7 @@ function RouteComponent() {
               Upload Video
             </Button>
           </DialogTrigger>
-          <VideoUpload />
+          <VideoForm mode="create" />
         </Dialog>
       </div>
 

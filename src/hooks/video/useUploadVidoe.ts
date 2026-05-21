@@ -13,7 +13,7 @@ export const useUploadVideo = () => {
     },
     onSuccess: (response) => {
       toast.success(response.message);
-      queryClient.invalidateQueries({ queryKey: channelVideosKey.all });
+      queryClient.invalidateQueries({queryKey:channelVideosKey.all})
     },
   });
 };

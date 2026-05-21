@@ -29,27 +29,18 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { AlertDialog } from "@/components/ui/alert-dialog";
+import { Dialog } from "@/components/ui/dialog";
 import DeleteVideoAlert from "./DeleteVideoAlert";
+import VideoForm from "./VideoForm";
 import { useDeleteVideo } from "@/hooks/video/useDeleteVideo";
 import { useToggleVideoStatus } from "@/hooks/video/useToggleVideoStatus";
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleString(undefined, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-
-const formatDuration = (seconds: number) => {
-  if (!seconds || seconds < 0) return "0:00";
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return `${m}:${s.toString().padStart(2, "0")}`;
-};
+import { formatDuration, formatDate } from "@/lib/dtformatter";
 
 const cellPad = "py-3.5";
 
 const VideoRow = ({ video }: { video: Video }) => {
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const { mutate: deleteVideo, isPending: isDeleting } = useDeleteVideo();
   const { mutate: togglePublish } = useToggleVideoStatus();
 
@@ -58,8 +49,7 @@ const VideoRow = ({ video }: { video: Video }) => {
   };
 
   const handleEdit = () => {
-    // TODO: open edit dialog / route once an update endpoint exists.
-    toast.info("Edit coming soon");
+    setEditOpen(true);
   };
 
   const handleDelete = () => {
@@ -156,6 +146,19 @@ const VideoRow = ({ video }: { video: Video }) => {
             isDeleting={isDeleting}
           />
         </AlertDialog>
+
+        <Dialog open={editOpen} onOpenChange={setEditOpen}>
+          <VideoForm
+            mode="edit"
+            videoId={video._id}
+            defaultValues={{
+              title: video.title,
+              description: video.description,
+              thumbnail: video.thumbnail,
+            }}
+            onSuccess={() => setEditOpen(false)}
+          />
+        </Dialog>
       </TableCell>
     </TableRow>
   );
