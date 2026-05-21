@@ -19,9 +19,18 @@ import { Switch } from "@/components/ui/switch";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Video } from "@/api/video.api";
 import { useGetChannelVideos } from "@/hooks/video/useGetChannelVideos";
-import { Eye, MoreVertical, Pencil, Trash2, Video as VideoIcon } from "lucide-react";
+import {
+  Eye,
+  MoreVertical,
+  Pencil,
+  Trash2,
+  Video as VideoIcon,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { AlertDialog } from "@/components/ui/alert-dialog";
+import DeleteVideoAlert from "./DeleteVideoAlert";
+import { useDeleteVideo } from "@/hooks/video/useDeleteVideo";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleString(undefined, {
@@ -40,6 +49,8 @@ const cellPad = "py-3.5";
 
 const VideoRow = ({ video }: { video: Video }) => {
   const [isPublished, setIsPublished] = useState(video.isPublished);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const { mutate: deleteVideo, isPending: isDeleting } = useDeleteVideo();
 
   const handleTogglePublish = (next: boolean) => {
     setIsPublished(next);
@@ -52,8 +63,9 @@ const VideoRow = ({ video }: { video: Video }) => {
   };
 
   const handleDelete = () => {
-    // TODO: call delete endpoint and invalidate the channel-videos query.
-    toast.info("Delete coming soon");
+    deleteVideo(video._id, {
+      onSuccess: () => setDeleteOpen(false),
+    });
   };
 
   return (
@@ -103,7 +115,9 @@ const VideoRow = ({ video }: { video: Video }) => {
       </TableCell>
 
       {/* Date uploaded */}
-      <TableCell className={`${cellPad} text-muted-foreground whitespace-nowrap`}>
+      <TableCell
+        className={`${cellPad} text-muted-foreground whitespace-nowrap`}
+      >
         {formatDate(video.createdAt)}
       </TableCell>
 
@@ -121,22 +135,34 @@ const VideoRow = ({ video }: { video: Video }) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={handleEdit}>
+            <DropdownMenuItem onSelect={handleEdit}>
               <Pencil />
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem variant="destructive" onClick={handleDelete}>
+            <DropdownMenuItem
+              variant="destructive"
+              onSelect={() => setDeleteOpen(true)}
+            >
               <Trash2 />
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+          <DeleteVideoAlert
+            title={video.title}
+            onConfirm={handleDelete}
+            isDeleting={isDeleting}
+          />
+        </AlertDialog>
       </TableCell>
     </TableRow>
   );
 };
 
-const headClass = "text-muted-foreground text-sm font-semibold tracking-wide text-center";
+const headClass =
+  "text-muted-foreground text-sm font-semibold tracking-wide text-center";
 
 const ChannelVideos = () => {
   const { data: videos = [], isPending, error } = useGetChannelVideos();

@@ -33,3 +33,8 @@ export const getChannelVideos = async (): Promise<Video[]> => {
   const { data } = await apiClient.get("/dashboard/videos");
   return data.data;
 };
+
+export const deleteVideo = async (videoId: string): Promise<ApiResponse> => {
+  const { data } = await apiClient.delete(`/video/${videoId}`);
+  return data;
+};
