@@ -1,6 +1,25 @@
 import type { ApiResponse } from "@/types/api.types";
 import { apiClient } from "./index.api";
 
+export type Video = {
+  _id: string;
+  title: string;
+  videoFile: string;
+  thumbnail: string;
+  description: string;
+  duration: number;
+  views: number;
+  isPublished: boolean;
+  updatedAt: string;
+  createdAt: string;
+  owner: {
+    _id: string;
+    fullName: string;
+    avatar: string;
+    username: string;
+  };
+};
+
 export const uploadVideo = async (
   videoData: FormData,
 ): Promise<ApiResponse> => {
@@ -8,4 +27,9 @@ export const uploadVideo = async (
     timeout: 0,
   });
   return data;
+};
+
+export const getChannelVideos = async (): Promise<Video[]> => {
+  const { data } = await apiClient.get("/dashboard/videos");
+  return data.data;
 };

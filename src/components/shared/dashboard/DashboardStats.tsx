@@ -3,12 +3,12 @@ import type { LucideIcon } from "lucide-react";
 type DashboardStatsProps = {
   Icon: LucideIcon;
   title: string;
-  count: string;
+  count: number;
 };
 
 const DashboardStats = ({
   Icon,
-  count = "0",
+  count = 0,
   title = "",
 }: DashboardStatsProps) => {
   return (
@@ -18,7 +18,9 @@ const DashboardStats = ({
       </div>
       <div>
         <p className="text-sm text-muted-foreground">{title}</p>
-        <h2 className="font-bold text-2xl mt-1 text-card-foreground">{count}</h2>
+        <h2 className="font-bold text-2xl mt-1 text-card-foreground">
+          {count}
+        </h2>
       </div>
     </div>
   );

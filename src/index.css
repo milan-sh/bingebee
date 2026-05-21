@@ -1,6 +1,18 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+/* Radix data-state / attribute shorthands used across the UI kit */
+@custom-variant data-open (&[data-state="open"]);
+@custom-variant data-closed (&[data-state="closed"]);
+@custom-variant data-checked (&[data-state="checked"]);
+@custom-variant data-unchecked (&[data-state="unchecked"]);
+@custom-variant data-disabled (&[data-disabled]);
+@custom-variant data-inset (&[data-inset="true"]);
+@custom-variant data-active (&[data-active="true"]);
+@custom-variant data-vertical (&[data-orientation="vertical"]);
+@custom-variant data-horizontal (&[data-orientation="horizontal"]);
 
 :root {
   --background: oklch(1.0000 0 0);

@@ -8,6 +8,10 @@ import { Eye, Heart, LayoutDashboard, Plus, UserRound } from "lucide-react";
 import { useEffect } from "react";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import VideoUpload from "@/components/shared/dashboard/VideoUpload";
+import { useDashboardStats } from "@/hooks/dashboard/useDashboardStats";
+import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
+import ChannelVideos from "@/components/shared/dashboard/ChannelVideos";
 
 export const Route = createFileRoute("/dashboard")({
   component: RouteComponent,
@@ -17,6 +21,14 @@ function RouteComponent() {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const user = useUserStore((state) => state.user);
   const { state, setOpen } = useSidebar();
+
+  const { data: channelStats, isPending, error } = useDashboardStats();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (state === "expanded") {
@@ -30,6 +42,15 @@ function RouteComponent() {
         Icon={LayoutDashboard}
         message="Login to upload and publish your videos"
       />
+    );
+  }
+  if (isPending) {
+    return (
+      <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 p-4">
+        <Skeleton className="h-[30vh] rounded-lg" />
+        <Skeleton className="h-[30vh] rounded-lg" />
+        <Skeleton className="h-[30vh] rounded-lg" />
+      </div>
     );
   }
   return (
@@ -57,14 +78,23 @@ function RouteComponent() {
 
       {/* stats */}
       <div className="my-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <DashboardStats Icon={Eye} title="Total Views" count="1,200" />
+        <DashboardStats
+          Icon={Eye}
+          title="Total Views"
+          count={channelStats?.toatalViews ?? 0}
+        />
         <DashboardStats
           Icon={UserRound}
           title="Total Subscribers"
-          count="200"
+          count={channelStats?.totalSubscribers ?? 0}
         />
-        <DashboardStats Icon={Heart} title="Total Likes" count="200" />
+        <DashboardStats
+          Icon={Heart}
+          title="Total Video Likes"
+          count={channelStats?.totalVideoLikes ?? 0}
+        />
       </div>
+      <ChannelVideos />
     </div>
   );
 }
