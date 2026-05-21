@@ -31,6 +31,7 @@ import { toast } from "sonner";
 import { AlertDialog } from "@/components/ui/alert-dialog";
 import DeleteVideoAlert from "./DeleteVideoAlert";
 import { useDeleteVideo } from "@/hooks/video/useDeleteVideo";
+import { useToggleVideoStatus } from "@/hooks/video/useToggleVideoStatus";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleString(undefined, {
@@ -48,13 +49,12 @@ const formatDuration = (seconds: number) => {
 const cellPad = "py-3.5";
 
 const VideoRow = ({ video }: { video: Video }) => {
-  const [isPublished, setIsPublished] = useState(video.isPublished);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const { mutate: deleteVideo, isPending: isDeleting } = useDeleteVideo();
+  const { mutate: togglePublish } = useToggleVideoStatus();
 
-  const handleTogglePublish = (next: boolean) => {
-    setIsPublished(next);
-    // TODO: call publish-toggle endpoint, revert + toast.error on failure.
+  const handleTogglePublish = (videoId: string) => {
+    togglePublish(videoId);
   };
 
   const handleEdit = () => {
@@ -73,16 +73,16 @@ const VideoRow = ({ video }: { video: Video }) => {
       {/* Visibility switch */}
       <TableCell className={`${cellPad} pl-4`}>
         <Switch
-          checked={isPublished}
-          onCheckedChange={handleTogglePublish}
+          checked={video.isPublished}
+          onCheckedChange={() => handleTogglePublish(video._id)}
           aria-label={`Toggle visibility for ${video.title}`}
         />
       </TableCell>
 
       {/* Published / Unpublished */}
       <TableCell className={cellPad}>
-        <Badge variant={isPublished ? "default" : "secondary"}>
-          {isPublished ? "Published" : "Unpublished"}
+        <Badge variant={video.isPublished ? "default" : "secondary"}>
+          {video.isPublished ? "Published" : "Unpublished"}
         </Badge>
       </TableCell>
 

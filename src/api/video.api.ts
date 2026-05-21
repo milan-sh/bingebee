@@ -38,3 +38,19 @@ export const deleteVideo = async (videoId: string): Promise<ApiResponse> => {
   const { data } = await apiClient.delete(`/video/${videoId}`);
   return data;
 };
+
+export const togglePublishVideo = async (
+  videoId: string,
+): Promise<ApiResponse> => {
+  const { data } = await apiClient.patch(`/video/toggle/publish/${videoId}`);
+  return data;
+};
+
+export const updateVideoDetails = async (
+  updateData: FormData,
+  videoId: string,
+): Promise<ApiResponse> => {
+  const { data } = await apiClient.patch(`/video/${videoId}`, updateData);
+  return data;
+};
+
