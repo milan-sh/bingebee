@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Upload } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useDropzone, type FileRejection } from "react-dropzone";
 import { useForm, type SubmitHandler, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -56,7 +56,7 @@ const VideoForm = ({
     setValue,
     watch,
     reset,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty },
   } = useForm<FormValues>({
     resolver: zodResolver(
       isEdit ? VideoEditSchema : VideoUploadSchema,
@@ -252,7 +252,7 @@ const VideoForm = ({
         <Button
           type="submit"
           className="mt-4 w-full py-2"
-          disabled={!isValid || isPending}
+          disabled={!isValid || isPending || (isEdit ? !isDirty : false)}
         >
           {isPending ? (
             <>
