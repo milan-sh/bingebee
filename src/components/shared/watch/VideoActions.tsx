@@ -26,7 +26,7 @@ const VideoActions = ({ video }: { video: Video }) => {
 
       {/* Actions */}
       <div className="flex items-center gap-2">
-        <LikeButton />
+        <LikeButton videoId={video._id} />
         <ShareButton title={video.title} />
         <SaveButton />
       </div>
