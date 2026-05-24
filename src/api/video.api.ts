@@ -54,13 +54,19 @@ export const updateVideoDetails = async (
   return data;
 };
 
-export const getVidoes = async (): Promise<Video[]> => {
-  const { data } = await apiClient.get("/video/", {params: { page: 1, limit:10,  }});
+export const getVideos = async (): Promise<Video[]> => {
+  const { data } = await apiClient.get("/video/", {
+    params: { page: 1, limit: 10 },
+  });
   return data.data;
-}
+};
 
 export const getVideoById = async (videoId: string): Promise<Video> => {
   const { data } = await apiClient.get(`/video/${videoId}`);
   return data.data;
 };
 
+export const addViewToVideo = async (videoId: string): Promise<ApiResponse> => {
+  const { data } = await apiClient.patch(`/video/addView/${videoId}`);
+  return data;
+};

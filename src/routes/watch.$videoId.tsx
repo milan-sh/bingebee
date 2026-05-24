@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import { useVideo } from "@/hooks/video/useVideo";
 import { useVideos } from "@/hooks/video/useVideos";
+import { useAddVideoView } from "@/hooks/video/useAddVideoView";
+import { useAddToWatchHistory } from "@/hooks/user/useAddToWatchHistory";
+import { useUserStore } from "@/store/userStore";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeTime, formatViews } from "@/lib/dtformatter";
 import RelatedVideoItem from "@/components/shared/watch/RelatedVideoItem";
@@ -19,12 +22,23 @@ function RouteComponent() {
   const { videoId } = Route.useParams();
   const { data: video, isPending, error } = useVideo(videoId);
   const { data: allVideos = [] } = useVideos();
+  const { mutate: addView } = useAddVideoView();
+  const { mutate: addToHistory } = useAddToWatchHistory();
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
 
   useEffect(() => {
     if (error) {
       toast.error(error.message);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (videoId) addView(videoId);
+  }, [videoId, addView]);
+
+  useEffect(() => {
+    if (videoId && isAuthenticated) addToHistory(videoId);
+  }, [videoId, isAuthenticated, addToHistory]);
 
   const related = allVideos.filter((v) => v._id !== videoId);
 
