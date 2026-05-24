@@ -43,7 +43,7 @@ const ShareButton = ({ title }: { title: string }) => {
           Share
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="sm:max-w-md">
         <DialogTitle>Share this video</DialogTitle>
 
         {/* Row 1: social targets */}
