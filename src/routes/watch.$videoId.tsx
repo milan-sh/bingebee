@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeTime, formatViews } from "@/lib/dtformatter";
 import RelatedVideoItem from "@/components/shared/watch/RelatedVideoItem";
 import VideoActions from "@/components/shared/watch/VideoActions";
+import CommentsSection from "@/components/shared/comment/CommentsSection";
 import { useSidebar } from "@/components/ui/sidebar";
 
 export const Route = createFileRoute("/watch/$videoId")({
@@ -72,6 +73,8 @@ function RouteComponent() {
                 {video.description}
               </p>
             </div>
+
+            <CommentsSection videoId={video._id} />
           </div>
         ) : null}
       </div>

@@ -32,7 +32,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
           </SidebarProvider>
         </ThemeProvider>
       </QueryClientProvider>
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </div>
   ),
 

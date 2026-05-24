@@ -4,7 +4,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -14,9 +13,9 @@ import { Link } from "@tanstack/react-router";
 import {
   Clock,
   Folder,
+  HeartPlus,
   Home,
-  MessageCircleHeart,
-  Settings,
+  MessageSquare,
   ThumbsUp,
   UserCheck,
   Video,
@@ -40,8 +39,8 @@ const MAIN_LINKS: NavLink[] = [
 ];
 
 const FOOTER_LINKS: NavLink[] = [
-  { id: 1, icon: Settings, name: "Settings", url: "/settings" },
-  { id: 2, icon: MessageCircleHeart, name: "Feedback", url: "/feedback" },
+  { id: 1, icon: HeartPlus, name: "Support", url: "/support" },
+  { id: 2, icon: MessageSquare, name: "Feedback", url: "/feedback" },
 ];
 
 export function AppSidebar() {
