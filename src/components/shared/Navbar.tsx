@@ -70,7 +70,9 @@ const Navbar = () => {
                 <Link to="/dashboard">Dashboard</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link to="/channel">Channel</Link>
+                <Link to="/c/$username" params={{ username: user?.username }}>
+                  Channel
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer">
@@ -86,7 +88,10 @@ const Navbar = () => {
                     </>
                   ) : (
                     <>
-                      <LogOut color="red" className="inline-flex items-center mr-2" />
+                      <LogOut
+                        color="red"
+                        className="inline-flex items-center mr-2"
+                      />
                       Logout
                     </>
                   )}
