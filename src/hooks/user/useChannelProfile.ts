@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { getChannel } from "@/api/channel.api";
 
-export const channelProfileKey = (channelId: string) =>
-  ["channel-profile", channelId] as const;
+export const channelProfileKey = (username: string) =>
+  ["channel-profile", username] as const;
 
-export const useChannelProfile = (username: string, channelId: string) => {
+export const useChannelProfile = (username: string) => {
   return useQuery({
-    queryKey: channelProfileKey(channelId),
+    queryKey: channelProfileKey(username),
     queryFn: () => getChannel(username),
-    enabled: !!username && !!channelId,
+    enabled: !!username,
   });
 };
