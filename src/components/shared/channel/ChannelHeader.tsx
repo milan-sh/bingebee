@@ -2,6 +2,8 @@ import type { Channel } from "@/schemas/channel.schema";
 import { formatSubscribersCount } from "@/lib/subscriptionformatter";
 import SubscribeButton from "../watch/SubscribeButton";
 import ChannelAvatar from "./ChannelAvatar";
+import { Button } from "@/components/ui/button";
+import { Pencil } from "lucide-react";
 
 type ChannelHeaderProps = {
   channel: Channel;
@@ -24,11 +26,16 @@ const ChannelHeader = ({ channel, isOwner }: ChannelHeaderProps) => {
           {channel.channelsSubscribedToCount} Subscribed
         </p>
       </div>
-      {!isOwner && (
+      {!isOwner ? (
         <SubscribeButton
           channelId={channel._id}
           isSubscribed={channel.isSubscribed}
         />
+      ) : (
+        <Button className="h-10 px-4">
+          <Pencil className="mr-2" size={16} />
+          Edit Channel
+        </Button>
       )}
     </div>
   );

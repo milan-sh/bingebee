@@ -16,3 +16,10 @@ export const toggleVideoLike = async (
   const { data } = await apiClient.post(`/like/toggle/v/${videoId}`);
   return data;
 };
+
+export const togglePostLike = async (
+  postId: string,
+): Promise<ApiResponse> => {
+  const { data } = await apiClient.post(`/like/toggle/t/${postId}`);
+  return data;
+};

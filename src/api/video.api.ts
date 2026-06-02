@@ -61,10 +61,10 @@ export const getVideos = async (): Promise<Video[]> => {
   return data.data;
 };
 
-export const getVideosByChannel = async (userId: string): Promise<Video[]> => {
-  const { data } = await apiClient.get("/video/", {
-    params: { userId, page: 1, limit: 30 },
-  });
+export const getVideosByChannel = async (
+  channelId: string,
+): Promise<Video[]> => {
+  const { data } = await apiClient.get(`/video/videos/${channelId}`);
   return data.data;
 };
 

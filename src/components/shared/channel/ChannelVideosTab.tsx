@@ -1,9 +1,9 @@
 import { Video as VideoIcon } from "lucide-react";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import VideoCard from "@/components/shared/home/VideoCard";
 import VideoCardSkeleton from "@/components/shared/home/VideoCardSkeleton";
 import { useGetVideosByChannel } from "@/hooks/video/useGetVideosByChannel";
+import ChannelVideoCard from "./ChannelVideoCard";
 
 type ChannelVideosTabProps = {
   channelId: string;
@@ -38,7 +38,7 @@ const ChannelVideosTab = ({ channelId }: ChannelVideosTabProps) => {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {videos.map((video) => (
-        <VideoCard key={video._id} video={video} />
+        <ChannelVideoCard key={video._id} video={video} />
       ))}
     </div>
   );

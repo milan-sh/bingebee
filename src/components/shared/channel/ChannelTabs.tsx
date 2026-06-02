@@ -3,21 +3,24 @@ import { cn } from "@/lib/utils";
 import type { Channel } from "@/schemas/channel.schema";
 import ChannelVideosTab from "./ChannelVideosTab";
 import ChannelPlaylistsTab from "./ChannelPlaylistsTab";
+import ChannelPostsTab from "./ChannelPostsTab";
 import ChannelAboutTab from "./ChannelAboutTab";
 
-type TabKey = "videos" | "playlists" | "about";
+type TabKey = "videos" | "playlists" | "posts" | "about";
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "videos", label: "Videos" },
   { key: "playlists", label: "Playlists" },
+  { key: "posts", label: "Posts" },
   { key: "about", label: "About" },
 ];
 
 type ChannelTabsProps = {
   channel: Channel;
+  isOwner: boolean;
 };
 
-const ChannelTabs = ({ channel }: ChannelTabsProps) => {
+const ChannelTabs = ({ channel, isOwner }: ChannelTabsProps) => {
   const [active, setActive] = useState<TabKey>("videos");
 
   return (
@@ -43,6 +46,9 @@ const ChannelTabs = ({ channel }: ChannelTabsProps) => {
       {active === "videos" && <ChannelVideosTab channelId={channel._id} />}
       {active === "playlists" && (
         <ChannelPlaylistsTab channelId={channel._id} />
+      )}
+      {active === "posts" && (
+        <ChannelPostsTab channelId={channel._id} isOwner={isOwner} />
       )}
       {active === "about" && <ChannelAboutTab channel={channel} />}
     </div>

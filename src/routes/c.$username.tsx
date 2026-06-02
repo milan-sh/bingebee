@@ -70,7 +70,7 @@ function RouteComponent() {
         isOwner={isOwner}
       />
       <ChannelHeader channel={channelProfile} isOwner={isOwner} />
-      <ChannelTabs channel={channelProfile} />
+      <ChannelTabs channel={channelProfile} isOwner={isOwner} />
     </div>
   );
 }
