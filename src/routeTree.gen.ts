@@ -9,14 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SubscribersRouteImport } from './routes/subscribers'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LikedVideosRouteImport } from './routes/liked-videos'
+import { Route as HistoryRouteImport } from './routes/history'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WatchVideoIdRouteImport } from './routes/watch.$videoId'
 import { Route as ProfileIdRouteImport } from './routes/profile.$id'
 import { Route as CUsernameRouteImport } from './routes/c.$username'
 
+const SubscribersRoute = SubscribersRouteImport.update({
+  id: '/subscribers',
+  path: '/subscribers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -27,9 +36,24 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LikedVideosRoute = LikedVideosRouteImport.update({
+  id: '/liked-videos',
+  path: '/liked-videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsRoute = CollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,18 +79,26 @@ const CUsernameRoute = CUsernameRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/collections': typeof CollectionsRoute
   '/dashboard': typeof DashboardRoute
+  '/history': typeof HistoryRoute
+  '/liked-videos': typeof LikedVideosRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/subscribers': typeof SubscribersRoute
   '/c/$username': typeof CUsernameRoute
   '/profile/$id': typeof ProfileIdRoute
   '/watch/$videoId': typeof WatchVideoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/collections': typeof CollectionsRoute
   '/dashboard': typeof DashboardRoute
+  '/history': typeof HistoryRoute
+  '/liked-videos': typeof LikedVideosRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/subscribers': typeof SubscribersRoute
   '/c/$username': typeof CUsernameRoute
   '/profile/$id': typeof ProfileIdRoute
   '/watch/$videoId': typeof WatchVideoIdRoute
@@ -74,9 +106,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/collections': typeof CollectionsRoute
   '/dashboard': typeof DashboardRoute
+  '/history': typeof HistoryRoute
+  '/liked-videos': typeof LikedVideosRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/subscribers': typeof SubscribersRoute
   '/c/$username': typeof CUsernameRoute
   '/profile/$id': typeof ProfileIdRoute
   '/watch/$videoId': typeof WatchVideoIdRoute
@@ -85,27 +121,39 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/collections'
     | '/dashboard'
+    | '/history'
+    | '/liked-videos'
     | '/login'
     | '/signup'
+    | '/subscribers'
     | '/c/$username'
     | '/profile/$id'
     | '/watch/$videoId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/collections'
     | '/dashboard'
+    | '/history'
+    | '/liked-videos'
     | '/login'
     | '/signup'
+    | '/subscribers'
     | '/c/$username'
     | '/profile/$id'
     | '/watch/$videoId'
   id:
     | '__root__'
     | '/'
+    | '/collections'
     | '/dashboard'
+    | '/history'
+    | '/liked-videos'
     | '/login'
     | '/signup'
+    | '/subscribers'
     | '/c/$username'
     | '/profile/$id'
     | '/watch/$videoId'
@@ -113,9 +161,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CollectionsRoute: typeof CollectionsRoute
   DashboardRoute: typeof DashboardRoute
+  HistoryRoute: typeof HistoryRoute
+  LikedVideosRoute: typeof LikedVideosRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
+  SubscribersRoute: typeof SubscribersRoute
   CUsernameRoute: typeof CUsernameRoute
   ProfileIdRoute: typeof ProfileIdRoute
   WatchVideoIdRoute: typeof WatchVideoIdRoute
@@ -123,6 +175,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/subscribers': {
+      id: '/subscribers'
+      path: '/subscribers'
+      fullPath: '/subscribers'
+      preLoaderRoute: typeof SubscribersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -137,11 +196,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/liked-videos': {
+      id: '/liked-videos'
+      path: '/liked-videos'
+      fullPath: '/liked-videos'
+      preLoaderRoute: typeof LikedVideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections': {
+      id: '/collections'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,9 +257,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CollectionsRoute: CollectionsRoute,
   DashboardRoute: DashboardRoute,
+  HistoryRoute: HistoryRoute,
+  LikedVideosRoute: LikedVideosRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
+  SubscribersRoute: SubscribersRoute,
   CUsernameRoute: CUsernameRoute,
   ProfileIdRoute: ProfileIdRoute,
   WatchVideoIdRoute: WatchVideoIdRoute,

@@ -1,6 +1,7 @@
 import { apiClient } from "./index.api";
 import { type ApiResponse } from "@/types/api.types";
 import { type User } from "@/types/user.types";
+import type { Video } from "./video.api";
 
 export const addVideoToWatchHistory = async (
   videoId: string,
@@ -9,9 +10,9 @@ export const addVideoToWatchHistory = async (
   return data;
 };
 
-export const getWatchHistory = async (): Promise<ApiResponse> => {
+export const getWatchHistory = async (): Promise<Video[]> => {
   const { data } = await apiClient.get("/users/history");
-  return data;
+  return data.data;
 };
 
 export const sendFeedback = async (feedback: string): Promise<ApiResponse> => {
@@ -39,9 +40,10 @@ export const updateCoverImage = async (
   return data;
 };
 
-export const updateAccountDetails = async (
-  updateData: { fullName: string; email: string },
-): Promise<ApiResponse<{ user: User }>> => {
+export const updateAccountDetails = async (updateData: {
+  fullName: string;
+  email: string;
+}): Promise<ApiResponse<{ user: User }>> => {
   const { data } = await apiClient.patch("/users/update-account", updateData);
   return data;
 };
@@ -52,4 +54,9 @@ export const changePassword = async (payload: {
 }): Promise<ApiResponse> => {
   const { data } = await apiClient.post("/users/change-password", payload);
   return data;
+};
+
+export const getUserHistory = async (): Promise<Video[]> => {
+  const { data } = await apiClient.get("/users/history");
+  return data.data;
 };
