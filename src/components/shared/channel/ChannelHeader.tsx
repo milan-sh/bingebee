@@ -4,6 +4,7 @@ import SubscribeButton from "../watch/SubscribeButton";
 import ChannelAvatar from "./ChannelAvatar";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 type ChannelHeaderProps = {
   channel: Channel;
@@ -32,10 +33,12 @@ const ChannelHeader = ({ channel, isOwner }: ChannelHeaderProps) => {
           isSubscribed={channel.isSubscribed}
         />
       ) : (
-        <Button className="h-10 px-4">
-          <Pencil className="mr-2" size={16} />
-          Edit Channel
-        </Button>
+        <Link to={`/profile/$id`} params={{ id: channel._id }}>
+          <Button className="h-10 px-4">
+            <Pencil className="mr-2" size={16} />
+            Edit Channel
+          </Button>
+        </Link>
       )}
     </div>
   );

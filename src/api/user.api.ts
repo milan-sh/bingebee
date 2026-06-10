@@ -38,3 +38,18 @@ export const updateCoverImage = async (
   const { data } = await apiClient.patch("/users/cover-image", fd);
   return data;
 };
+
+export const updateAccountDetails = async (
+  updateData: { fullName: string; email: string },
+): Promise<ApiResponse<{ user: User }>> => {
+  const { data } = await apiClient.patch("/users/update-account", updateData);
+  return data;
+};
+
+export const changePassword = async (payload: {
+  oldPassword: string;
+  newPassword: string;
+}): Promise<ApiResponse> => {
+  const { data } = await apiClient.post("/users/change-password", payload);
+  return data;
+};

@@ -11,9 +11,16 @@ type ChannelAvatarProps = {
   avatar?: string;
   fullName?: string;
   isOwner: boolean;
+  /** Keep the upload control available even when an avatar already exists. */
+  alwaysEditable?: boolean;
 };
 
-const ChannelAvatar = ({ avatar, fullName, isOwner }: ChannelAvatarProps) => {
+const ChannelAvatar = ({
+  avatar,
+  fullName,
+  isOwner,
+  alwaysEditable = false,
+}: ChannelAvatarProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { mutate: uploadAvatar, isPending } = useUpdateAvatar();
 
@@ -24,7 +31,7 @@ const ChannelAvatar = ({ avatar, fullName, isOwner }: ChannelAvatarProps) => {
   };
 
   const initial = fullName?.charAt(0).toUpperCase() ?? "U";
-  const canUpload = isOwner && !avatar;
+  const canUpload = isOwner && (alwaysEditable || !avatar);
 
   return (
     <div className="relative size-20 shrink-0 sm:size-32">
