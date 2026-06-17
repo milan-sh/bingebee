@@ -19,6 +19,7 @@ export const sendFeedback = async (feedback: string): Promise<ApiResponse> => {
   const { data } = await apiClient.post("/users/feedback", {
     feedback: feedback,
   });
+  console.log(data)
   return data;
 };
 

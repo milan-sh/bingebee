@@ -5,11 +5,15 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
+  validateSearch: (search: Record<string, unknown>): { query?: string } => ({
+    query: typeof search.query === "string" ? search.query : undefined,
+  }),
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { data: videos = [], isPending, error } = useVideos();
+  const { query } = Route.useSearch();
+  const { data: videos = [], isPending, error } = useVideos(query);
 
   useEffect(() => {
     if (error) {

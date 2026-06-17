@@ -54,9 +54,9 @@ export const updateVideoDetails = async (
   return data;
 };
 
-export const getVideos = async (): Promise<Video[]> => {
+export const getVideos = async (query?: string): Promise<Video[]> => {
   const { data } = await apiClient.get("/video/", {
-    params: { page: 1, limit: 10 },
+    params: { page: 1, limit: 10, query },
   });
   return data.data;
 };

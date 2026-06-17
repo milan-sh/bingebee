@@ -5,9 +5,9 @@ export const useVideosKeys = {
   all: ["videos"] as const,
 };
 
-export const useVideos = () => {
+export const useVideos = (query?: string) => {
   return useQuery({
-    queryKey: useVideosKeys.all,
-    queryFn: getVideos,
+    queryKey: [...useVideosKeys.all, query],
+    queryFn: () => getVideos(query),
   });
 };

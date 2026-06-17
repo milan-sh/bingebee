@@ -30,7 +30,9 @@ const Navbar = () => {
         <SidebarTrigger>
           <TextAlignJustify strokeWidth={2.5} size={26} />
         </SidebarTrigger>
-        <img src={logo} alt="Logo" className="h-7 md:h-8" />
+        <Link to="/">
+          <img src={logo} alt="Logo" className="h-7 md:h-8" />
+        </Link>
       </div>
       <Searchbar />
       {!isAuthenticated && (
