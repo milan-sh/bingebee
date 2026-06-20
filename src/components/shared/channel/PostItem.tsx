@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MoreVertical, Pencil, ThumbsUp, Trash2 } from "lucide-react";
+import { MoreVertical, Pencil, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,12 +18,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { cn } from "@/lib/utils";
 import { formatRelativeTime } from "@/lib/dtformatter";
 import { useUserStore } from "@/store/userStore";
 import { useUpdatePost } from "@/hooks/post/useUpdatePost";
 import { useDeletePost } from "@/hooks/post/useDeletePost";
-import { useTogglePostLike } from "@/hooks/post/useTogglePostLike";
 import type { Post } from "@/schemas/post.schema";
 import PostForm from "./PostForm";
 
@@ -34,7 +32,6 @@ type PostItemProps = {
 
 const PostItem = ({ post, channelId }: PostItemProps) => {
   const currentUser = useUserStore((state) => state.user);
-  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const isOwner = currentUser?._id === post.owner._id;
 
   const [editing, setEditing] = useState(false);
@@ -42,7 +39,6 @@ const PostItem = ({ post, channelId }: PostItemProps) => {
 
   const { mutate: updatePost, isPending: updating } = useUpdatePost(channelId);
   const { mutate: deletePost, isPending: deleting } = useDeletePost(channelId);
-  const { mutate: toggleLike } = useTogglePostLike(channelId);
 
   const handleUpdate = (content: string) => {
     updatePost(

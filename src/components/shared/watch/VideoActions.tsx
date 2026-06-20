@@ -10,7 +10,6 @@ import ShareButton from "./ShareButton";
 const VideoActions = ({ video }: { video: Video }) => {
   const { data: channelProfile, error } = useChannelProfile(
     video.owner.username,
-    video.owner._id,
   );
 
   useEffect(() => {

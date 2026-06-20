@@ -2,7 +2,7 @@ import { Loader2 } from "lucide-react";
 import { useUserStore } from "@/store/userStore";
 import { useVideoComments } from "@/hooks/comment/useVideoComments";
 import { usePostComment } from "@/hooks/comment/usePostComment";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import CommentItem from "./CommentItem";

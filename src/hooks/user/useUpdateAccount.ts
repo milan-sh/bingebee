@@ -15,8 +15,9 @@ export const useUpdateAccount = () => {
       // submitted values so the store always reflects the change regardless of
       // the endpoint's response shape.
       const current = useUserStore.getState().user;
+      const serverUser = response.success ? response.data?.user : undefined;
       const updatedUser =
-        response.data?.user ?? (current ? { ...current, ...variables } : null);
+        serverUser ?? (current ? { ...current, ...variables } : null);
       if (updatedUser) {
         setUser(updatedUser);
       }

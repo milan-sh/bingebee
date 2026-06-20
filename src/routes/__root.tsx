@@ -4,7 +4,6 @@ import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 interface RouterContext {
   isAuthenticated: boolean;
 }
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ThemeProvider } from "@/hooks/theme-provider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/shared/app-sidebar";
